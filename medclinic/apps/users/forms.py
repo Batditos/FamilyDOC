@@ -1,7 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
 from .models import CustomUser
 import re
+
+
+
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, required=True, label='Имя')
@@ -38,4 +42,37 @@ class CustomUserCreationForm(UserCreationForm):
         password2 = cleaned_data.get('password2')
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('Пароли не совпадают')
+        return cleaned_data
+
+class LoginForm(forms.Form):
+    login = forms.CharField(max_length=100, required=True, label='Email или номер телефона')
+    password = forms.CharField(widget=forms.PasswordInput, required=True, label='Пароль')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        login = cleaned_data.get('login')
+        password = cleaned_data.get('password')
+
+        if login and password:
+            # Check if login is email or phone
+            if '@' in login:
+                try:
+                    user = CustomUser.objects.get(email=login)
+                except CustomUser.DoesNotExist:
+                    raise forms.ValidationError('Неверный email или пароль')
+            else:
+                if not re.match(r'^\+?\d{10,15}$', login):
+                    raise forms.ValidationError('Неверный формат номера телефона')
+                try:
+                    user = CustomUser.objects.get(phone_number=login)
+                except CustomUser.DoesNotExist:
+                    raise forms.ValidationError('Неверный номер телефона или пароль')
+
+            # Authenticate user
+            user = authenticate(username=user.username, password=password)
+            if not user:
+                raise forms.ValidationError('Неверный пароль')
+            if not user.is_active:
+                raise forms.ValidationError('Учетная запись не активна')
+            cleaned_data['user'] = user
         return cleaned_data

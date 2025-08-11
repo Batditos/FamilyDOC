@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     
      # Локальные приложения
     #  
-     'users.apps.UsersConfig'
+     'users.apps.UsersConfig',
+     
 ]
 
 MIDDLEWARE = [
