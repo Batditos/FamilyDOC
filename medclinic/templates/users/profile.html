@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Личный кабинет</title>
+</head>
+<body>
+    <h2>Личный кабинет</h2>
+    <p><strong>ФИО:</strong> {{ user.last_name }} {{ user.first_name }} {{ user.patronymic }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Телефон:</strong> {{ user.phone_number }}</p>
+    <p><a href="{% url 'users:update_phone' %}">Изменить номер телефона</a></p>
+    <p><a href="{% url 'users:login' %}">Выйти</a></p>
+    <p><a href="{% url 'home' %}">Главная страница</a></p>
+</body>
+</html>

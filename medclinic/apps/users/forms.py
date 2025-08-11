@@ -96,3 +96,16 @@ class PasswordResetRequestForm(forms.Form):
 class PasswordResetConfirmForm(SetPasswordForm):
     new_password1 = forms.CharField(widget=forms.PasswordInput, label='Новый пароль')
     new_password2 = forms.CharField(widget=forms.PasswordInput, label='Подтверждение пароля')
+    
+class PhoneUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['phone_number']
+
+    def clean_phone_number(self):
+        phone = self.cleaned_data['phone_number']
+        if not re.match(r'^\+?\d{10,15}$', phone):
+            raise forms.ValidationError('Неверный формат: только цифры, длина 10-15.')
+        if CustomUser.objects.filter(phone_number=phone).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('Этот номер телефона уже используется.')
+        return phone

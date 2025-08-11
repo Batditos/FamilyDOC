@@ -6,6 +6,10 @@ from django.utils.encoding import force_bytes, force_str
 from django.urls import reverse
 from .forms import CustomUserCreationForm, LoginForm, PasswordResetRequestForm, PasswordResetConfirmForm
 from .models import CustomUser
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import PhoneUpdateForm
+
 
 def register(request):
     if request.method == 'POST':
@@ -25,7 +29,7 @@ def user_login(request):
         if form.is_valid():
             user = form.cleaned_data['user']
             login(request, user)
-            return redirect('core/home.html')
+            return redirect('users:profile')
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
@@ -65,3 +69,21 @@ def password_reset_confirm(request, uidb64, token):
             form = PasswordResetConfirmForm(user)
         return render(request, 'users/password_reset_confirm.html', {'form': form})
     return render(request, 'users/invalid_token.html')
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html', {'user': request.user})
+
+@login_required
+def update_phone(request):
+    if request.method == 'POST':
+        form = PhoneUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Номер телефона обновлен.')
+            return redirect('users:profile')
+        else:
+            messages.error(request, 'Ошибка обновления номера телефона.')
+    else:
+        form = PhoneUpdateForm(instance=request.user)
+    return render(request, 'users/update_phone.html', {'form': form})
