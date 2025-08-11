@@ -1,0 +1,62 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+</head>
+<body>
+    <h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+        <a href="{% url 'users:register' %}">Регистрация</a>
+        <a href="{% url 'users:password_reset_request' %}">Забыл пароль</a>
+    </form>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+</head>
+<body>
+    <h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <p>
+            <label for="id_password">Пароль:</label>
+            <input type="password" name="password" id="id_password" required>
+            <button type="button" id="togglePassword" aria-label="Показать пароль" style="margin-left: 10px;">👁️</button>
+        </p>
+
+        {% for field in form %}
+          {% if field.name != 'password' %}
+            {{ field }}
+          {% endif %}
+        {% endfor %}
+        
+        <button type="submit">Войти</button>
+        <a href="{% url 'users:register' %}">Регистрация</a>
+        <a href="{% url 'users:password_reset_request' %}">Забыл пароль</a>
+    </form>
+
+<script>
+  const passwordInput = document.getElementById('id_password');
+  const toggleBtn = document.getElementById('togglePassword');
+
+  toggleBtn.addEventListener('mousedown', () => {
+    passwordInput.type = 'text';
+  });
+
+  toggleBtn.addEventListener('mouseup', () => {
+    passwordInput.type = 'password';
+  });
+
+  toggleBtn.addEventListener('mouseleave', () => {
+    // Если курсор ушёл с кнопки, скрываем пароль
+    passwordInput.type = 'password';
+  });
+</script>
+</body>
+</html>

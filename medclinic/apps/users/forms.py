@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth import authenticate
 from .models import CustomUser
 import re
@@ -76,3 +76,23 @@ class LoginForm(forms.Form):
                 raise forms.ValidationError('Учетная запись не активна')
             cleaned_data['user'] = user
         return cleaned_data
+    
+    
+class PasswordResetRequestForm(forms.Form):
+    login = forms.CharField(max_length=100, required=True, label='Email или номер телефона')
+
+    def clean_login(self):
+        login = self.cleaned_data['login']
+        if '@' in login:
+            if not CustomUser.objects.filter(email=login).exists():
+                raise forms.ValidationError('Пользователь с этим email не найден')
+        else:
+            if not re.match(r'^\+?\d{10,15}$', login):
+                raise forms.ValidationError('Неверный формат номера телефона')
+            if not CustomUser.objects.filter(phone_number=login).exists():
+                raise forms.ValidationError('Пользователь с этим номером телефона не найден')
+        return login
+
+class PasswordResetConfirmForm(SetPasswordForm):
+    new_password1 = forms.CharField(widget=forms.PasswordInput, label='Новый пароль')
+    new_password2 = forms.CharField(widget=forms.PasswordInput, label='Подтверждение пароля')

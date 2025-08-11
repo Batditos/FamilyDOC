@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ссылка для сброса пароля</title>
+</head>
+<body>
+    <h2>Ссылка для сброса пароля</h2>
+    <p>Перейдите по ссылке для сброса пароля: <a href="{{ reset_url }}">{{ reset_url }}</a></p>
+    <p><a href="{% url 'users:login' %}">Вернуться на вход</a></p>
+</body>
+</html>

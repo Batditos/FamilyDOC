@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ошибка сброса пароля</title>
+</head>
+<body>
+    <h2>Ошибка</h2>
+    <p>Ссылка для сброса пароля недействительна или истек срок действия.</p>
+    <p><a href="{% url 'password_reset_request' %}">Попробовать снова</a></p>
+    <p><a href="{% url 'login' %}">Вернуться на вход</a></p>
+</body>
+</html>
