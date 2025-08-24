@@ -1,0 +1,341 @@
+/* CSS-переменные для централизованного управления цветами и размерами */
+:root {
+    --color-primary: #00a0e3;
+    --color-secondary: #007bb5;
+    --color-text: #222;
+    --color-bg-light: #f8f8f8;
+    --color-border: #eee;
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Общие стили для всех экранов (Mobile-first) */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    padding-top: 70px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-secondary);
+}
+
+/* Блок Header */
+.header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--color-border);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.header__logo {
+    max-height: 60px;
+    vertical-align: middle;
+}
+
+/* Блок навигации */
+.header__nav--desktop {
+    display: none; /* Скрываем основное меню на мобильных устройствах */
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+}
+
+.nav-item {
+    position: relative;
+}
+/* .nav-link {
+   background-image: linear-gradient(
+    to right,
+    #54b3d6,
+    #54b3d6 50%,
+    #000 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.nav-link:before{
+  content: '';
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+.nav-link:hover {
+ background-position: 0;
+}
+.nav-link:hover::before{
+  width: 100%;
+} */
+.nav-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-primary);
+    background-color: #fff;
+    padding: 0 35px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 25px;
+    transition: .5s;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+.nav-submenu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    list-style: none;
+    margin: 0;
+    min-width: 180px;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+}
+
+.nav-item:hover > .nav-submenu {
+    display: block;
+}
+
+/* Кнопки действий */
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header__action-btn,
+.header__action-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.3s ease-in-out;
+}
+
+.header__action-btn:hover,
+.header__action-link:hover {
+    color: var(--color-primary);
+}
+
+.header__action-btn--burger {
+    display: block; /* Показываем на мобильных */
+}
+.header__action-btn--profile {
+  display: none;
+}
+/* Мобильное меню (по умолчанию скрыто) */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+   background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.mobile-menu--is-open {
+  
+    transform: translateX(0);
+}
+
+.mobile-menu__content {
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #fff;
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.mobile-menu__close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.mobile-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mobile-menu__link {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+}
+
+.mobile-menu__submenu {
+    display: none; /* Скрываем аккордеон по умолчанию */
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding-left: 20px;
+}
+
+.mobile-menu__item--is-open .mobile-menu__submenu {
+    display: block; /* Показываем при открытии */
+}
+
+/* Модальное окно */
+.modal {
+    display: none; /* Скрываем по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal--is-open {
+    display: flex;
+}
+
+.modal__content {
+    background: #fff;
+    padding: 50px 10px 10px;
+    border-radius: 5px;
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+.modal__close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Блок Footer */
+.footer {
+    flex-shrink: 0;
+    background: var(--color-bg-light);
+    color: #333;
+    padding: 20px 0;
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+}
+
+.footer__container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer__section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer__heading {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.footer__list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Медиа-запросы для адаптации на десктопе */
+@media (min-width: 1025px) {
+    .header__logo {
+        max-height: 100px;
+    }
+    
+    .header__nav--desktop {
+        display: flex;
+    }
+    .header__action-btn--profile {
+      display: block;
+    }
+    .header__action-btn--burger {
+        display: none; /* Скрываем бургер-меню на десктопе */
+    }
+
+    .header__actions {
+        order: 1; /* Чтобы кнопки действий были справа */
+    }
+}

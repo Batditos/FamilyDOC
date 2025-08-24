@@ -1,18 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница</title>
-</head>
-<body>
-    <p>УРА</p>
+{% extends 'base.html' %}
+{% load static %}
 
-    {% if user.is_authenticated %}
-        <a href="{% url 'users:profile' %}">Профиль</a>
-    {% else %}
-        <a href="{% url 'users:login' %}">Вход в личный кабинет</a>
-    {% endif %}
+{% block content %}
+<div id="banner-carousel">
+    <div class="banner-item active">
+        <div class="banner-text">
+            <h2>Въездная служба CMD:</h2>
+            <ul>
+                <li>К точному времени</li>
+                <li>Еженедельно, без выходных</li>
+            </ul>
+        </div>
+        <div class="banner-image">Заглушка для изображения (автомобиль CMD)</div>
+    </div>
+    <div class="banner-item">
+        <div class="banner-text">
+            <h2>Другая услуга:</h2>
+            <ul>
+                <li>Описание 1</li>
+                <li>Описание 2</li>
+            </ul>
+        </div>
+        <div class="banner-image">Заглушка для другого изображения</div>
+    </div>
+    <!-- Добавьте больше элементов для динамического контента -->
+</div>
 
-</body>
-</html>
+<div class="search-bar">
+    <input type="search" placeholder="Поиск анализов" aria-label="Поиск анализов">
+</div>
+
+<div id="popular-analyses" class="popular-cards">
+    <!-- Заглушки для карточек; заменить на AJAX-загрузку с backend -->
+    <div class="card">Заглушка: Популярный анализ 1</div>
+    <div class="card">Заглушка: Популярный анализ 2</div>
+    <div class="card">Заглушка: Популярный анализ 3</div>
+    <!-- Для backend: {% for analysis in popular_analyses %} <div class="card">{{ analysis.name }}</div> {% endfor %} -->
+</div>
+{% endblock %}
