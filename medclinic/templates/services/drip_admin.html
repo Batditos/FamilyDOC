@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админка капельниц</title>
+</head>
+<body>
+    <h1>Управление капельницами</h1>
+    <a href="{% url 'services:drip_add' %}">Добавить капельницу</a>
+    <ul>
+        {% for drip in drips %}
+            <li>
+                {{ drip.name }} — {{ drip.price }} ₽
+                <a href="{% url 'services:drip_edit' drip.pk %}">Редактировать</a>
+                <a href="{% url 'services:drip_delete' drip.pk %}">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'services:drip_list' %}">Назад к списку</a>
+</body>
+</html>

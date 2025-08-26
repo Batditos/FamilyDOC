@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),  # Главная страница
     path('users/', include('users.urls', namespace='users')),  # Префикс для users
+    path("services/", include("services.urls", namespace='services')),
 ]

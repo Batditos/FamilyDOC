@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if drip %}Редактировать{% else %}Добавить{% endif %} капельницу</title>
+</head>
+<body>
+    <h1>{% if drip %}Редактировать{% else %}Добавить{% endif %} капельницу</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Название: <input type="text" name="name" value="{{ drip.name|default:'' }}"></label><br>
+        <label>Цена: <input type="text" name="price" value="{{ drip.price|default:'' }}"></label><br>
+        <label>Описание:<br>
+            <textarea name="description">{{ drip.description|default:'' }}</textarea>
+        </label><br>
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="{% url 'services:drip_admin' %}">Назад</a>
+</body>
+</html>

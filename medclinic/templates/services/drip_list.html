@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Капельницы</title>
+</head>
+<body>
+    <h1>Список капельниц</h1>
+    <ul>
+        {% for drip in drips %}
+            <li>{{ drip.name }} — {{ drip.price }} ₽<br>{{ drip.description }}</li>
+        {% empty %}
+            <li>Нет капельниц</li>
+        {% endfor %}
+    </ul>
+    {% if request.user.is_staff %}
+        <a href="{% url 'services:drip_admin' %}">Админка капельниц</a>
+    {% endif %}
+    <a href="/">Главная страница</a>
+</body>
+</html>
