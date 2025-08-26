@@ -73,7 +73,7 @@ def password_reset_confirm(request, uidb64, token):
             if form.is_valid():
                 form.save()
                 login(request, user)  # Log in user after reset
-                return redirect('login')
+                return redirect('users:profile')
         else:
             form = PasswordResetConfirmForm(user)
         return render(request, 'users/password_reset_confirm.html', {'form': form})

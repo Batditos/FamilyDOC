@@ -18,11 +18,11 @@ def order_create(request):
         else:
             name = request.POST.get("name")
             phone = request.POST.get("phone")
-            email = request.POST.get("email")  # если хочешь email гостей
+            # email = request.POST.get("email")  # если хочешь email гостей
             order = Order.objects.create(
                 guest_name=name,
                 guest_phone=phone,
-                guest_email=email
+                # guest_email=email
             )
 
         # Копируем элементы корзины

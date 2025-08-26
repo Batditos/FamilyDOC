@@ -85,11 +85,11 @@
                 <a href="#" class="mobile-menu__link mobile-menu__link--accordion">Анализы и цены</a>
                 <ul class="mobile-menu__submenu">
                     <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Анализы</a></li>
-                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Капельницы</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="{% url 'services:drip_list' %}" class="mobile-menu__submenu-link">Капельницы</a></li>
                 </ul>
             </li>
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Результаты анализов</a></li>
-            <li class="mobile-menu__item"><a href="/" class="mobile-menu__link">О Нас</a></li>
+            <li class="mobile-menu__item"><a href="{% url 'users:admin_profile' %}" class="mobile-menu__link">Админка</a></li>
         </ul>
         <div class="mobile-menu__footer">
             {% if user.is_authenticated %}
