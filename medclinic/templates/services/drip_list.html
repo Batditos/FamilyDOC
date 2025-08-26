@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Капельницы</title>
+    <title>Каталог капельниц</title>
 </head>
 <body>
-    <h1>Список капельниц</h1>
+    <h1>Каталог капельниц</h1>
     <ul>
         {% for drip in drips %}
-            <li>{{ drip.name }} — {{ drip.price }} ₽<br>{{ drip.description }}</li>
+            <li>
+                <strong>{{ drip.name }}</strong> — {{ drip.price }} ₽
+                {% comment %} <a href="{% url 'services:drip_detail' drip.id %}">Подробнее</a> {% endcomment %}
+
+                <!-- Кнопка добавления в корзину -->
+                <form action="{% url 'cart:cart_add' drip.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Добавить в корзину</button>
+                </form>
+            </li>
         {% empty %}
             <li>Нет капельниц</li>
         {% endfor %}
     </ul>
-    {% if request.user.is_staff %}
-        <a href="{% url 'services:drip_admin' %}">Админка капельниц</a>
-    {% endif %}
-    <a href="/">Главная страница</a>
+    <br>
+    <a href="{% url 'services:drip_admin' %}">Админка капельниц</a>
+    <a href="{% url 'cart:cart_detail' %}">Перейти в корзину</a>
 </body>
 </html>
+
+        
+

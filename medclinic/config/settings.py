@@ -48,7 +48,8 @@ INSTALLED_APPS = [
      # Локальные приложения
     #  
      'users.apps.UsersConfig',
-     'services'
+     'services',
+     'cart'
      
 ]
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Корзина</title>
+</head>
+<body>
+    <h1>Ваша корзина</h1>
+    <ul>
+        {% for item in cart.items.all %}
+            <li>
+                {{ item.service.name }} — {{ item.quantity }} × {{ item.service.price }} ₽ =
+                {{ item.total_price }} ₽
+                <a href="{% url 'cart:cart_remove' item.id %}">Удалить</a>
+            </li>
+        {% empty %}
+            <li>Корзина пуста</li>
+        {% endfor %}
+    </ul>
+
+    {% if cart.items.all %}
+        <a href="{% url 'orders:order_create' %}">Оформить заказ</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'services:drip_list' %}">Вернуться к услугам</a>
+</body>
+</html>
