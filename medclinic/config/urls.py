@@ -19,8 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),  # Главная страница
+    path('', include('core.urls', namespace='core')),  # Главная страница
     path('users/', include('users.urls', namespace='users')),  # Префикс для users
     path("services/", include("services.urls", namespace='services')),
     path("cart/", include("cart.urls", namespace='cart')),
+    path("orders/", include("orders.urls", namespace='orders')),
 ]

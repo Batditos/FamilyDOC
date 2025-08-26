@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     #  
      'users.apps.UsersConfig',
      'services',
-     'cart'
+     'cart',
+     'orders'
      
 ]
 

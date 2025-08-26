@@ -10,7 +10,12 @@
             <li>
                 {{ item.service.name }} — {{ item.quantity }} × {{ item.service.price }} ₽ =
                 {{ item.total_price }} ₽
-                <a href="{% url 'cart:cart_remove' item.id %}">Удалить</a>
+
+                <!-- Кнопка удалить -->
+                <form action="{% url 'cart:cart_remove' item.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
             </li>
         {% empty %}
             <li>Корзина пуста</li>

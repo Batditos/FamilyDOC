@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import login, logout
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.urls import reverse
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Count
+from orders.models import Order, OrderItem
 from .forms import CustomUserCreationForm, LoginForm, PasswordResetRequestForm, PasswordResetConfirmForm
 from .models import CustomUser
 from django.contrib.auth.decorators import login_required
@@ -33,6 +36,12 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect("core:home")
 
 def password_reset_request(request):
     if request.method == 'POST':
@@ -87,3 +96,44 @@ def update_phone(request):
     else:
         form = PhoneUpdateForm(instance=request.user)
     return render(request, 'users/update_phone.html', {'form': form})
+
+@login_required
+def profile(request):
+    user = request.user
+    # Получаем заказы текущего пользователя
+    orders = Order.objects.filter(user=user).order_by('-created_at')
+    return render(request, "users/profile.html", {"user": user,"orders": orders,})
+
+@login_required
+def order_detail(request, order_id):
+    """
+    Подробная информация о заказе пользователя.
+    """
+    order = get_object_or_404(Order, pk=order_id, user=request.user)
+    return render(request, "orders/order_detail.html", {"order": order})
+
+
+
+@login_required
+def admin_profile(request):
+    return render(request, 'users/admin_profile.html', {'user': request.user})
+
+@login_required
+def admin_profile(request):
+    # Все заказы, отсортированные по дате
+    orders_all = Order.objects.all().order_by('-created_at')
+    
+    # Топ популярных товаров
+    popular = (
+        OrderItem.objects
+        .values('name')
+        .annotate(order_count=Count('order', distinct=True))
+        .order_by('-order_count')[:5]  # топ 5
+    )
+
+    context = {
+        'user': request.user,
+        'orders_all': orders_all,
+        'popular': popular
+    }
+    return render(request, 'users/admin_profile.html', context)

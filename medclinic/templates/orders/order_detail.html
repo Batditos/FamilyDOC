@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детали заказа {{ order.id }}</title>
+</head>
+<body>
+    <h1>Заказ №{{ order.id }}</h1>
+    <p>Дата/Время: {{ order.created_at }}</p>
+    <p>Итого: {{ order.total_price }} ₽</p>
+
+    <h2>Состав заказа:</h2>
+    <table border="1">
+        <tr>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+        </tr>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price|floatformat:2|add:"0"|floatformat:2|floatformat }} ₽</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{% url 'users:profile' %}">Вернуться к списку заказов</a>
+</body>
+</html>

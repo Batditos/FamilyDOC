@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Заказ успешно оформлен</title>
+</head>
+<body>
+    <h1>Спасибо за заказ!</h1>
+    <p>Номер заказа: {{ order.id }}</p>
+    <p>Итого: {{ order.total_price }} ₽</p>
+    <a href="{% url 'services:drip_list' %}">Вернуться к каталогу</a>
+</body>
+</html>

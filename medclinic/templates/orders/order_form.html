@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Оформление заказа</title>
+</head>
+<body>
+    <h1>Оформление заказа</h1>
+
+    <h2>Ваш заказ:</h2>
+    <ul>
+        {% for item in cart.items.all %}
+            <li>{{ item.service.name }} — {{ item.quantity }} × {{ item.service.price }} ₽</li>
+        {% endfor %}
+    </ul>
+
+    {% if request.user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Подтвердить заказ</button>
+        </form>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <label>Ваше имя: <input type="text" name="name" required></label><br>
+            <label>Телефон: <input type="text" name="phone" required></label><br>
+            <button type="submit">Подтвердить заказ</button>
+        </form>
+    {% endif %}
+</body>
+</html>
