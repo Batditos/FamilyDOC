@@ -13,51 +13,61 @@
     
     <!-- Подключение основного файла стилей, использующего БЭМ и Mobile-first -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     
     {% block extra_css %}{% endblock %}
 </head>
-<body>
-
+<body >
+<!-- class="no-scroll" -->
 <header class="header">
+    
     <div class="header__container container">
         <a href="/" class="header__logo-link">
-            <img src="{% static 'image/logo.png' %}" alt="Логотип" class="header__logo">
+            <div class="header__logo">Family :<span class="header__logo--sub">DOC</span><span class="header__logo--slogan">Всегда рядом</span></div>
+            <div class="header__logo--info">Медицинская клиника-партнер НИИ Эпидемиологии и Роспотребнадзора CMD </div>
         </a>
-        
+        <div><p class="contact">+7 (903) 224 6322</p></div>
         <!-- Основное навигационное меню -->
         <nav class="header__nav header__nav--desktop" aria-label="Главное меню">
             <ul class="nav-list">
+                <li class="nav-item"><a href="{% url 'users:admin_profile' %}" class="nav-link">О нас</a></li>
                 <li class="nav-item nav-item--has-sub">
-                    <a href="#" class="nav-link">Запись к врачу</a>
+                    <a href="#" class="nav-link">Услуги и цены</a>
                     <ul class="nav-submenu">
-                        <li class="nav-submenu__item"><a href="/" class="nav-submenu__link">Врач 1</a></li>
-                        <li class="nav-submenu__item"><a href="/" class="nav-submenu__link">Врач 2</a></li>
+                        <li class="nav-submenu__item"><a href="/" class="nav-submenu__link"><span>Каталог анализов</span></a></li>
+                        <li class="nav-submenu__item"><a href="{% url 'services:drip_list' %}" class="nav-submenu__link"><span>Каталог капельниц</span></a></li>
+                        <li class="nav-submenu__item"><a href="{% url 'services:drip_list' %}" class="nav-submenu__link"><span>Запись к врачу</span></a></li>
                     </ul>
                 </li>
-                <li class="nav-item nav-item--has-sub">
-                    <a href="#" class="nav-link">Анализы и цены</a>
-                    <ul class="nav-submenu">
-                        <li class="nav-submenu__item"><a href="/" class="nav-submenu__link">Каталог анализов</a></li>
-                        <li class="nav-submenu__item"><a href="{% url 'services:drip_list' %}" class="nav-submenu__link">Каталог капельниц</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="#" class="nav-link">Результаты анализов</a></li>
-                <li class="nav-item"><a href="{% url 'users:admin_profile' %}" class="nav-link">админка</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Подписки</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">FAQ</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+               
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link">Профиль</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Личный кабинет</a></li>
+                {% endif %}
+                <li> <a href="{% url 'cart:cart_detail' %}" class="header__action-link header__action-link--cart" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
         </nav>
         
         <!-- Навигация и элементы для мобильной/десктопной версии -->
-        <div class="header__actions">
-            <button id="search-btn" class="header__action-btn" aria-label="Открыть поиск"><i class="fa fa-search"></i></button>
-            <a href="{% url 'cart:cart_detail' %}" class="header__action-link" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a>
-             {% if user.is_authenticated %}
-                <a href="{% url 'users:profile' %}" class="header__action-link"><i class="fa fa-user" style="color: green;"></i></a>
-            {% else %}
-                <a href="{% url 'users:login' %}" class="header__action-link header__action-btn--profile"><i class="fa fa-user"></i>Войти</a>
-            {% endif %}
-            <button id="burger-btn" class="header__action-btn header__action-btn--burger" aria-label="Открыть меню" aria-expanded="false"><i class="fa fa-bars"></i></button>
-        </div>
+        
+           
+           
+           
+            <button id="burger-btn" class="header__action-btn header__action-btn--burger" aria-label="Открыть меню" aria-expanded="false">
+                <svg class="hamburger-icon" viewBox="0 0 100 100" width="44" onclick="this.parentElement.classList.toggle('is-open')">
+                    <path class="hamburger-icon__line--top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
+                    <path class="hamburger-icon__line--middle" d="m 70,50 h -40" />
+                    <path class="hamburger-icon__line--bottom" d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
+                </svg>
+
+            </button>
+        
     </div>
+    
 </header>
 
 <!-- Модальное окно поиска -->
@@ -72,71 +82,78 @@
 <!-- Мобильное боковое меню -->
 <nav id="mobile-menu" class="mobile-menu" aria-label="Мобильное меню">
     <div class="mobile-menu__content">
-        <button id="close-mobile-menu" class="mobile-menu__close-btn" aria-label="Закрыть меню">&times;</button>
         <ul class="mobile-menu__list">
-            <li class="mobile-menu__item mobile-menu__item--has-sub">
-                <a href="#" class="mobile-menu__link mobile-menu__link--accordion">Запись к врачу</a>
+            <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Запись к врачу</a></li>
+             <li class="mobile-menu__item mobile-menu__item--has-sub">
+                <a href="#" class="mobile-menu__link mobile-menu__link--accordion">Услуги и цены</a>
                 <ul class="mobile-menu__submenu">
-                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Врач 1</a></li>
-                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Врач 2</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Каталог анализов</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="{% url 'services:drip_list' %}" class="mobile-menu__submenu-link">Каталог капельниц</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Pfgbcm </a></li>
                 </ul>
             </li>
             <li class="mobile-menu__item mobile-menu__item--has-sub">
-                <a href="#" class="mobile-menu__link mobile-menu__link--accordion">Анализы и цены</a>
+                <a href="#" class="mobile-menu__link mobile-menu__link--accordion">Подписки</a>
                 <ul class="mobile-menu__submenu">
-                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Анализы</a></li>
-                    <li class="mobile-menu__submenu-item"><a href="{% url 'services:drip_list' %}" class="mobile-menu__submenu-link">Капельницы</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Дежурный врач</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Light</a></li>
+                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Special</a></li>
                 </ul>
             </li>
+           
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Результаты анализов</a></li>
+            <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">FAQ</a></li>
+            <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">О нас</a></li>
             <li class="mobile-menu__item"><a href="{% url 'users:admin_profile' %}" class="mobile-menu__link">Админка</a></li>
         </ul>
         <div class="mobile-menu__footer">
             {% if user.is_authenticated %}
-                <a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> {{ user.last_name }} {{ user.first_name }}</a>
+                <a href="{% url 'users:profile' %}" class="mobile-menu__profile-link"><i class="fa fa-user-circle"></i> {{ user.last_name }} {{ user.first_name }}</a>
             {% else %}
-                <a href="{% url 'users:login' %}"><i class="fa fa-user"></i> Войти</a>
+                <a href="{% url 'users:login' %}" class="mobile-menu__profile-link"><i class="fa fa-user"></i> Войти</a>
             {% endif %}
-            <p>+7 (909) 999-99-99</p>
+            <span>+7 (909) 999-99-99</span>
         </div>
     </div>
 </nav>
 
-<main id="app" class="main__container container">
+<main class="main-content-padding main__container">
     {% block content %}{% endblock %}
 </main>
-
+<svg class="footer-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#fff" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,218.7C672,213,768,171,864,170.7C960,171,1056,213,1152,229.3C1248,245,1344,235,1392,230.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+</svg>
 <footer class="footer">
     <div class="footer__container container">
-      <div class="footer__section">
-        <h4 class="footer__heading">О нас</h4>
-        <ul class="footer__list">
-          <li class="footer__list-item"><a href="#" class="footer__link">Наша миссия</a></li>
-          <li class="footer__list-item"><a href="#" class="footer__link">Команда</a></li>
-        </ul>
-      </div>
-      <div class="footer__section">
-        <h4 class="footer__heading">Услуги</h4>
-        <ul class="footer__list">
-          <li class="footer__list-item"><a href="#" class="footer__link">Консультации</a></li>
-          <li class="footer__list-item"><a href="#" class="footer__link">Анализы</a></li>
-        </ul>
-      </div>
-      <div class="footer__section">
-        <h4 class="footer__heading">Контакты</h4>
-        <ul class="footer__list">
-          <li class="footer__list-item"><a href="/" class="footer__link">+1 234 567 89</a></li>
-          <li class="footer__list-item"><a href="/" class="footer__link">info@familydoc.com</a></li>
-        </ul>
-      </div>
-      <div class="footer__section footer__section--social">
-        <h4 class="footer__heading">Мы в соцсетях</h4>
-        <div class="footer__social-links">
-          <a href="#" class="footer__social-link"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a>
+        <div class="footer__section">
+            <h4 class="footer__heading">О нас</h4>
+            <ul class="footer__list">
+                <li class="footer__list-item"><a href="#" class="footer__link">Наша миссия</a></li>
+                <li class="footer__list-item"><a href="#" class="footer__link">Команда</a></li>
+            </ul>
         </div>
-      </div>
+        <div class="footer__section">
+            <h4 class="footer__heading">Услуги</h4>
+            <ul class="footer__list">
+                <li class="footer__list-item"><a href="#" class="footer__link">Консультации</a></li>
+                <li class="footer__list-item"><a href="#" class="footer__link">Анализы</a></li>
+            </ul>
+        </div>
+        <div class="footer__section">
+            <h4 class="footer__heading">Контакты</h4>
+            <ul class="footer__list">
+                <li class="footer__list-item"><a href="/" class="footer__link">+1 234 567 89</a></li>
+                <li class="footer__list-item"><a href="/" class="footer__link">info@familydoc.com</a></li>
+            </ul>
+        </div>
+        <div class="footer__section footer__section--social">
+            <h4 class="footer__heading">Мы в соцсетях</h4>
+            <div class="footer__social-links">
+                <a href="#" class="footer__social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </div>
 </footer>
 

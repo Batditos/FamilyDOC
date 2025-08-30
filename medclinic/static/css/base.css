@@ -1,152 +1,85 @@
-/* CSS-переменные для централизованного управления цветами и размерами */
-:root {
-    --color-primary: #00a0e3;
-    --color-secondary: #007bb5;
-    --color-text: #222;
-    --color-bg-light: #f8f8f8;
-    --color-border: #eee;
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+/* * base.css: A foundational CSS file using the BEM methodology and a Mobile-first approach.
+ * It establishes global styles, a responsive grid system, and essential UI components.
+ */
 
-/* Общие стили для всех экранов (Mobile-first) */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
-    color: var(--color-text);
+/* General and reset styles */
+* {
+    box-sizing: border-box;
     margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    padding: 0;
 }
 
-.container {
-    padding-top: 70px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-primary);
-    transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-    color: var(--color-secondary);
-}
-
-/* Блок Header */
-.header {
-    background: #FFFFFF;
-    border-bottom: 1px solid var(--color-border);
-    position: fixed;
+html, body {
     width: 100%;
-    z-index: 1000;
+    height: 100%;
+    font-family: Century Gothic, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8;
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Universal container for responsive layouts */
+.container {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 15px; /* Adds horizontal padding for mobile devices */
+}
+
+/* Header styles */
+.header {
+    position: fixed; /* Header is now fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 1000; /* Ensures the header is always on top */
 }
 
 .header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 0 10px 10px 10px;
+}
+
+.header__logo-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 .header__logo {
-    max-height: 60px;
-    vertical-align: middle;
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
 }
 
-/* Блок навигации */
-.header__nav--desktop {
-    display: none; /* Скрываем основное меню на мобильных устройствах */
+.header__logo .header__logo--sub {
+    color: #54b3d6;
 }
-
-.nav-list {
-    display: flex;
-    list-style: none;
+.header__logo--slogan{
+    color: #bcbcbc;
+    font-size: 8px;
+    padding-left: 2px;
+}
+.header__logo--info {
     padding: 0;
     margin: 0;
-    gap: 25px;
+    color: #000;
+    font-size: 8px;
 }
-
-.nav-item {
-    position: relative;
-}
-/* .nav-link {
-   background-image: linear-gradient(
-    to right,
-    #54b3d6,
-    #54b3d6 50%,
-    #000 50%
-  );
-  background-size: 200% 100%;
-  background-position: -100%;
-  display: inline-block;
-  padding: 5px 0;
-  position: relative;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease-in-out;
-}
-.nav-link:before{
-  content: '';
-  background: #54b3d6;
-  display: block;
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 3px;
-  transition: all 0.3s ease-in-out;
-}
-.nav-link:hover {
- background-position: 0;
-}
-.nav-link:hover::before{
-  width: 100%;
-} */
-.nav-link {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--color-primary);
-    background-color: #fff;
-    padding: 0 35px;
-    height: 40px;
-    border: 1px solid;
-    border-radius: 25px;
-    transition: .5s;
-}
-
-.nav-link:hover {
-    color: #ffffff;
-    background-color: var(--color-primary);
-    transform: scale(1.05);
-}
-
-.nav-submenu {
+.contact {
     display: none;
-    position: absolute;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    list-style: none;
-    margin: 0;
-    min-width: 180px;
-    top: 100%;
-    left: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-md);
+}
+.header__nav--desktop {
+    display: none;
 }
 
-.nav-item:hover > .nav-submenu {
-    display: block;
-}
-
-/* Кнопки действий */
 .header__actions {
     display: flex;
     align-items: center;
@@ -158,160 +91,124 @@ a:hover {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 24px;
-    color: var(--color-text);
+    font-size: 20px;
+    color: #555;
     text-decoration: none;
-    padding: 5px;
-    transition: color 0.3s ease-in-out;
-}
-
-.header__action-btn:hover,
-.header__action-link:hover {
-    color: var(--color-primary);
 }
 
 .header__action-btn--burger {
-    display: block; /* Показываем на мобильных */
+    display: block;
 }
-.header__action-btn--profile {
-  display: none;
+.header__action-link--cart {
+    display: block;
 }
-/* Мобильное меню (по умолчанию скрыто) */
+/* Mobile menu */
 .mobile-menu {
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 60px; /* Adjusted to match header height */
+    left: 0;
+    bottom: 0; /* Ensures it fills the space to the bottom of the screen */
     width: 100%;
-    height: 100%;
-    z-index: 2000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-   background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Updated transitions for a smoother and more robust hide/show effect */
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform: translateY(-100%); /* Initially hide the menu above the screen */
+    opacity: 0; /* Make it completely transparent */
+    pointer-events: none; /* Prevent any interaction when hidden */
+    z-index: 999;
 }
 
-.mobile-menu--is-open {
-  
-    transform: translateX(0);
+.mobile-menu.is-open {
+    transform: translateY(0); /* Slide down to show the menu */
+    opacity: 1; /* Make it visible */
+    pointer-events: auto; /* Enable interaction */
 }
 
 .mobile-menu__content {
-    width: 80%;
-    max-width: 320px;
-    height: 100%;
-    background: #fff;
     padding: 20px;
-    position: relative;
-    box-sizing: border-box;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: auto; /* Allow content to scroll if it's too long */
 }
 
-.mobile-menu__close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 32px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.mobile-menu__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.mobile-menu__link {
-    font-size: 18px;
-    font-weight: 600;
-    color: #000;
-}
-
-.mobile-menu__submenu {
-    display: none; /* Скрываем аккордеон по умолчанию */
-    position: relative;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    padding-left: 20px;
-}
-
-.mobile-menu__item--is-open .mobile-menu__submenu {
-    display: block; /* Показываем при открытии */
-}
-
-/* Модальное окно */
+/* Modal styles */
 .modal {
-    display: none; /* Скрываем по умолчанию */
+    display: none;
     position: fixed;
-    top: 0;
+    z-index: 1001;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
 }
 
-.modal--is-open {
-    display: flex;
-}
-
 .modal__content {
-    background: #fff;
-    padding: 50px 10px 10px;
-    border-radius: 5px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
     position: relative;
     width: 90%;
     max-width: 500px;
-    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .modal__close-btn {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 15px;
     font-size: 24px;
     cursor: pointer;
 }
 
-/* Блок Footer */
-.footer {
-    flex-shrink: 0;
-    background: var(--color-bg-light);
-    color: #333;
-    padding: 20px 0;
+.modal__input {
     width: 100%;
-    margin-top: auto;
-    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.modal__submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #16a085;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Main content padding to clear the fixed header */
+.main-content-padding {
+    padding-top: 60px; /* Adjust this value as needed to match the header's height */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    margin-top: 0; /* Changed to 0 as wave handles separation */
 }
 
 .footer__container {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer__section {
-    flex: 1;
-    min-width: 200px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
 }
 
 .footer__heading {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
-    color: #000;
 }
 
 .footer__list {
@@ -319,23 +216,314 @@ a:hover {
     padding: 0;
 }
 
-/* Медиа-запросы для адаптации на десктопе */
-@media (min-width: 1025px) {
+.footer__list-item {
+    margin-bottom: 5px;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.footer__link:hover {
+    color: #fff;
+}
+
+.footer__social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer__social-link {
+    color: #ccc;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.footer__social-link:hover {
+    color: #fff;
+}
+
+/* Updated styles for mobile menu content */
+.mobile-menu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1; /* This will allow the list to fill available space */
+}
+
+.mobile-menu__item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.mobile-menu__link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu__link:hover,
+.mobile-menu__link:focus {
+    color: #16a085;
+}
+
+.mobile-menu__link--accordion {
+    position: relative;
+    padding-right: 40px; /* Make space for the icon */
+}
+
+.mobile-menu__link--accordion::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    line-height: 1;
+    color: #555;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu__item.is-open .mobile-menu__link--accordion::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.mobile-menu__submenu {
+    list-style: none;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    background-color: #fafafa;
+}
+
+.mobile-menu__submenu.is-open {
+    max-height: 200px; /* A value large enough to contain all submenu items */
+}
+
+.mobile-menu__submenu-item a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
+}
+
+.mobile-menu__submenu-item a:hover {
+    background-color: #eee;
+}
+
+.mobile-menu__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto; /* Pushes the footer to the bottom */
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.mobile-menu__profile-link {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+/* Styles for the footer wave */
+.footer-wave {
+    display: block;
+    width: 100%;
+    margin-bottom: -1px; /* Remove the small gap between SVG and footer */
+}
+
+.footer-wave path {
+    fill: #333; /* Color of the footer background */
+}
+/* Burger menu SVG styles */
+.hamburger-icon {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    user-select: none;
+    /* Убраны width и height, так как они задаются в HTML-коде */
+    fill: none; /* Make sure fill is none so strokes are visible */
+}
+.hamburger-icon path {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: #54b3d6; /* Changed to match other icon colors */
+    stroke-width: 5.5;
+    stroke-linecap: round;
+}
+.header__action-btn--burger.is-open .hamburger-icon {
+    transform: rotate(45deg);
+}
+.hamburger-icon__line--top {
+    stroke-dasharray: 40 82;
+}
+.hamburger-icon__line--middle {
+    stroke-dasharray: 40 111;
+}
+.hamburger-icon__line--bottom {
+    stroke-dasharray: 40 161;
+}
+.header__action-btn--burger.is-open .hamburger-icon__line--top {
+    stroke-dasharray: 17 82;
+    stroke-dashoffset: -62px;
+}
+.header__action-btn--burger.is-open .hamburger-icon__line--middle {
+    stroke-dashoffset: 23px;
+}
+.header__action-btn--burger.is-open .hamburger-icon__line--bottom {
+    stroke-dashoffset: -83px;
+}
+/* Media Queries for Desktop */
+@media (min-width: 768px) {
     .header__logo {
-        max-height: 100px;
-    }
     
+    font-size: 35px;
+   
+}
+
+    .header__logo--slogan{
+    padding-left: 10px;
+    font-size: 13px; 
+}
+    .header__logo--info {
+        font-size: 10px;
+
+    }
+    .contact {
+    display: block;
+}
     .header__nav--desktop {
-        display: flex;
+        display: block;
     }
-    .header__action-btn--profile {
-      display: block;
-    }
+
     .header__action-btn--burger {
-        display: none; /* Скрываем бургер-меню на десктопе */
+        display: none;
     }
 
     .header__actions {
-        order: 1; /* Чтобы кнопки действий были справа */
+        gap: 20px;
     }
+
+    .nav-list {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+        padding: 0;
+    }
+
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-item--has-sub:hover .nav-submenu {
+        display: block;
+    }
+
+  .nav-link {
+     background-image: linear-gradient( to right, #54b3d6, #54b3d6 50%, #000 50% ); 
+     background-size: 200% 100%; 
+     background-position: -100%; 
+     
+     display: inline-block; 
+     padding: 5px 0; 
+     position: relative; 
+     -webkit-background-clip: 
+     text; -webkit-text-fill-color: 
+     transparent; 
+     transition: all 0.3s ease-in-out; 
+    } 
+     .nav-link:before{ 
+        content: ''; 
+        background: #54b3d6; 
+        display: block; 
+        position: absolute; 
+        bottom: -3px; 
+        left: 0; 
+        width: 0; 
+        height: 3px; 
+        transition: all 0.3s ease-in-out; } .nav-link:hover { background-position: 0; } 
+  .nav-link:hover::before{ width: 100%;}
+
+
+    .footer__container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+/* Стили для подменю */
+.nav-submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    visibility: hidden; /* Скрывает и делает некликабельным */
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    min-width: 200px;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Эффект наведения: показывает подменю */
+.nav-item--has-sub:hover .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Стили для ссылок внутри подменю */
+.nav-submenu__link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    color: #4a5568;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Анимация при наведении на ссылку */
+.nav-submenu__link:hover {
+    color: #ffffff;
+     transition: color 0.1s ease-in-out; 
+}
+
+.nav-submenu__link:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color, #54b3d6);
+    transition: transform 0.3s ease-in-out;
+    z-index: 0;
+}
+
+.nav-submenu__link:hover:before {
+    transform: translateX(100%);
+}
+
+.nav-submenu__link > span {
+    position: relative;
+    z-index: 1;
 }

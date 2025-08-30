@@ -1,40 +1,91 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
+{% block title %}Главная{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+{% endblock %}
+
 {% block content %}
-<div id="banner-carousel">
-    <div class="banner-item active">
-        <div class="banner-text">
-            <h2>Въездная служба CMD:</h2>
-            <ul>
-                <li>К точному времени</li>
-                <li>Еженедельно, без выходных</li>
-            </ul>
-        </div>
-        <div class="banner-image">Заглушка для изображения (автомобиль CMD)</div>
-    </div>
-    <div class="banner-item">
-        <div class="banner-text">
-            <h2>Другая услуга:</h2>
-            <ul>
-                <li>Описание 1</li>
-                <li>Описание 2</li>
-            </ul>
-        </div>
-        <div class="banner-image">Заглушка для другого изображения</div>
-    </div>
-    <!-- Добавьте больше элементов для динамического контента -->
-</div>
+    <section class="hero">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide slide1">
+                  <div class="image-overlay"></div>
+                    <h2>Профессиональные анализы</h2>
+                    <p>Более 3000 медицинских исследований для всей семьи.
+                        Получайте точные и надежные результаты.</p>
+                    <a href="/" class="btn">Подробнее</a>
+                </div>
 
-<div class="search-bar">
-    <input type="search" placeholder="Поиск анализов" aria-label="Поиск анализов">
-</div>
+                <div class="swiper-slide slide2">
+                  <img class="slide-image" src="{% static 'image/img_1.jpg' %}" alt="Слайд">
+                   <div class="image-overlay"></div>
+                  <div class="content">
+                    <h2>Витаминная терапия</h2>
+                    <p>Комплексная терапия с помощью витаминных капельниц.
+                        Подберите свой индивидуальный курс вместе с врачом!</p>
+                    <a href="/" class="btn">Подробнее</a>
+                    </div>
+                </div>
 
-<div id="popular-analyses" class="popular-cards">
-    <!-- Заглушки для карточек; заменить на AJAX-загрузку с backend -->
-    <div class="card">Заглушка: Популярный анализ 1</div>
-    <div class="card">Заглушка: Популярный анализ 2</div>
-    <div class="card">Заглушка: Популярный анализ 3</div>
-    <!-- Для backend: {% for analysis in popular_analyses %} <div class="card">{{ analysis.name }}</div> {% endfor %} -->
-</div>
+                <div class="swiper-slide slide3">
+                  <div class="image-overlay"></div>
+                    <h2>Запись к врачу</h2>
+                    <p>Пройдите полную диагностику и подберите лечение.
+                        Мы собрали для вас лучших специалистов!</p>
+                    <a href="/" class="btn">Подробнее</a>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f8f8f8" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,218.7C672,213,768,171,864,170.7C960,171,1056,213,1152,229.3C1248,245,1344,235,1392,230.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </section>
+
+    <div class="container">
+        <section class="search-bar">
+            <input type="text" placeholder="Поиск анализов...">
+            
+        </section>
+
+        <section class="popular-cards">
+            <div class="card">
+                <h4>Популярное направление</h4>
+                <p>Витамин D</p>
+            </div>
+            <div class="card">
+                <h4>Популярное направление</h4>
+                <p>Общий анализ крови</p>
+            </div>
+            <div class="card">
+                <h4>Популярное направление</h4>
+                <p>Комплексный анализ</p>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var mySwiper = new Swiper('.swiper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
 {% endblock %}

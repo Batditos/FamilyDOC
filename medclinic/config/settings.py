@@ -31,7 +31,7 @@ DEBUG = env.bool('DEBUG', default=True)
 SECRET_KEY = env('SECRET_KEY')
 
 
-ALLOWED_HOSTS = ['192.168.1.58','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.1.58','127.0.0.1', 'localhost', '192.168.1.59']
 
 AUTH_USER_MODEL = 'users.CustomUser'
 # Application definition
