@@ -5,24 +5,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to toggle body scroll state
     const toggleBodyScroll = (disable) => {
-        document.body.classList.toggle('no-scroll', disable);
+        // Проверяем, существует ли элемент mobileMenu, прежде чем менять классы
+        if (mobileMenu) {
+            document.body.classList.toggle('no-scroll', disable);
+        }
+    };
+
+    // New function to close the menu, ensuring consistent state updates
+    const closeMenu = () => {
+        if (mobileMenu && burgerBtn) {
+            mobileMenu.classList.remove('is-open');
+            burgerBtn.classList.remove('is-open');
+            burgerBtn.setAttribute('aria-expanded', 'false');
+            toggleBodyScroll(false);
+        }
     };
 
     if (burgerBtn && mobileMenu) {
+        // Обработчик клика по бургер-кнопке
         burgerBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('is-open');
             const isMenuOpen = mobileMenu.classList.contains('is-open');
-
+            
             if (isMenuOpen) {
-                // Change icon to 'times' (X) and prevent body scroll
-                burgerBtn.querySelector('i').classList.remove('fa-bars');
-                burgerBtn.querySelector('i').classList.add('fa-times');
-                toggleBodyScroll(true);
+                closeMenu();
             } else {
-                // Change icon back to 'bars' and allow body scroll
-                burgerBtn.querySelector('i').classList.remove('fa-times');
-                burgerBtn.querySelector('i').classList.add('fa-bars');
-                toggleBodyScroll(false);
+                mobileMenu.classList.add('is-open');
+                burgerBtn.classList.add('is-open');
+                burgerBtn.setAttribute('aria-expanded', 'true');
+                toggleBodyScroll(true);
             }
         });
 
@@ -42,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function handleGesture() {
             if (touchendY < touchstartY - swipeThreshold && mobileMenu.classList.contains('is-open')) {
-                mobileMenu.classList.remove('is-open');
-                burgerBtn.querySelector('i').classList.remove('fa-times');
-                burgerBtn.querySelector('i').classList.add('fa-bars');
-                toggleBodyScroll(false);
+                closeMenu();
             }
         }
     }
@@ -80,13 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
     accordionLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
-            // This is important to prevent other event listeners from firing
             event.stopImmediatePropagation();
 
             const parentItem = event.target.closest('.mobile-menu__item');
-
             if (parentItem) {
-                // Toggle current submenu
                 parentItem.classList.toggle('is-open');
                 const submenu = parentItem.querySelector('.mobile-menu__submenu');
                 if (submenu) {

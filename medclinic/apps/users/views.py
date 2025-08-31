@@ -126,7 +126,7 @@ def admin_profile(request):
     # Топ популярных товаров
     popular = (
         OrderItem.objects
-        .values('name')
+        .values('name','price')
         .annotate(order_count=Count('order', distinct=True))
         .order_by('-order_count')[:5]  # топ 5
     )

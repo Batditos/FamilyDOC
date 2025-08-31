@@ -58,11 +58,13 @@
 <tr>
     <th>Название товара</th>
     <th>Количество заказов</th>
+    <th>Цена</th>
 </tr>
 {% for item in popular %}
 <tr>
     <td>{{ item.name }}</td>
     <td>{{ item.order_count }}</td>
+    <td>{{ item.price }}</td>
 </tr>
 {% empty %}
 <tr>

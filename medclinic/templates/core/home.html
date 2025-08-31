@@ -8,34 +8,35 @@
 {% endblock %}
 
 {% block content %}
-    <section class="hero">
+   <section class="hero relative">
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide slide1">
-                  <div class="image-overlay"></div>
-                    <h2>Профессиональные анализы</h2>
-                    <p>Более 3000 медицинских исследований для всей семьи.
-                        Получайте точные и надежные результаты.</p>
-                    <a href="/" class="btn">Подробнее</a>
+                    <div class="image-overlay"></div>
+                    <div class="content">
+                        <h2>Профессиональные анализы</h2>
+                        <p>Более 3000 медицинских исследований для всей семьи. Получайте точные и надежные результаты.</p>
+                        <a href="/" class="btn">Подробнее</a>
+                    </div>
                 </div>
 
                 <div class="swiper-slide slide2">
-                  <img class="slide-image" src="{% static 'image/img_1.jpg' %}" alt="Слайд">
-                   <div class="image-overlay"></div>
-                  <div class="content">
-                    <h2>Витаминная терапия</h2>
-                    <p>Комплексная терапия с помощью витаминных капельниц.
-                        Подберите свой индивидуальный курс вместе с врачом!</p>
-                    <a href="/" class="btn">Подробнее</a>
+                    <img class="slide-image" src="{% static 'image/img_1.jpg' %}" alt="Слайд">
+                    <div class="image-overlay"></div>
+                    <div class="content">
+                        <h2>Витаминная терапия</h2>
+                        <p>Комплексная терапия с помощью витаминных капельниц. Подберите свой индивидуальный курс вместе с врачом!</p>
+                        <a href="/" class="btn">Подробнее</a>
                     </div>
                 </div>
 
                 <div class="swiper-slide slide3">
-                  <div class="image-overlay"></div>
-                    <h2>Запись к врачу</h2>
-                    <p>Пройдите полную диагностику и подберите лечение.
-                        Мы собрали для вас лучших специалистов!</p>
-                    <a href="/" class="btn">Подробнее</a>
+                    <div class="image-overlay"></div>
+                    <div class="content">
+                        <h2>Запись к врачу</h2>
+                        <p>Пройдите полную диагностику и подберите лечение. Мы собрали для вас лучших специалистов!</p>
+                        <a href="/" class="btn">Подробнее</a>
+                    </div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -48,9 +49,96 @@
     <div class="container">
         <section class="search-bar">
             <input type="text" placeholder="Поиск анализов...">
-            
+            <button class="search-button" aria-label="Найти">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </button>
         </section>
+        
+        <section class="accordion-section">
+            <h2 class="accordion-title">Чем мы можем помочь?</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>Консультации и поддержка</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-grid">
+                        <div class="accordion-card">
+                            <h4>Проконсультироваться с врачом (очно/онлайн)</h4>
+                            <p>Если вас беспокоит что-то, вы всегда можете обратиться к нам! В любое время, в живую или по телефону!</p>
+                        </div>
+                        <div class="accordion-card">
+                            <h4>Получить альтернативное мнение по вашему диагнозу или случаю</h4>
+                            <p>Не знаете, что за диагноз, что делать дальше? Мы вам поможем!</p>
+                        </div>
+                        <div class="accordion-card">
+                            <h4>Задать вопрос, узнать ответы на вопросы по здоровью для всей семьи</h4>
+                            <p>Многодетная семья - не проблема, можете перестать думать о том, что сдавать и чем лечить каждого ребенка, мы всегда рядом и готовы помочь!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>Анализы и обследования</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-grid">
+                        <div class="accordion-card">
+                            <h4>Расшифровать результаты анализов</h4>
+                            <p>Ваши анализы под нашим контролем!</p>
+                        </div>
+                        <div class="accordion-card">
+                            <h4>Пройти полный ЧЕК-ап организма с сопровождением на всех этапах</h4>
+                            <p>Поможем пройти полное обследование организма в кратчайшие сроки с полным сопровождением</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>Дополнительные услуги</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-card">
+                        <h4>Собрать аптечку для путешествий</h4>
+                        <p>Подобрать индивидуальную аптечку для себя и всей семьи</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+         <div class="specialist-title-wrapper">
+        <h2 class="specialist-title">Выберите нужного специалиста или процедуру!</h2>
+    </div>
+    
+    <div class="container">
+        <section class="specialist-section">
+            <!-- First row with 4 elements -->
+            <div class="specialist-grid">
+                <a href="#" class="specialist-card"><h4>стоматолог</h4></a>
+                <a href="#" class="specialist-card"><h4>терапевт</h4></a>
+                <a href="#" class="specialist-card"><h4>гинеколог</h4></a>
+                <a href="#" class="specialist-card"><h4>уролог</h4></a>
+            </div>
+            <!-- Second row with 3 elements -->
+            <div class="specialist-grid">
+                <a href="#" class="specialist-card"><h4>эндокринолог<br>нутрициолог</h4></a>
+                <a href="#" class="specialist-card"><h4>ЭКГ/Холтер/ЭЭГ</h4></a>
+                <a href="#" class="specialist-card"><h4>капельницы/<br>уколы</h4></a>
+            </div>
+            <!-- Third row with 4 elements -->
+            <div class="specialist-grid">
+                <a href="#" class="specialist-card"><h4>УЗИ</h4></a>
+                <a href="#" class="specialist-card"><h4>невролог</h4></a>
+                <a href="#" class="specialist-card"><h4>спермограмма</h4></a>
+                <a href="#" class="specialist-card"><h4>анализы</h4></a>
+            </div>
+        </section>
         <section class="popular-cards">
             <div class="card">
                 <h4>Популярное направление</h4>
@@ -87,5 +175,46 @@
                 },
             });
         });
+        const accordionHeaders = document.querySelectorAll('.accordion-header'); {
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.icon');
+
+                    // Закрываем все другие аккордеоны
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header && otherHeader.classList.contains('active')) {
+                            const otherContent = otherHeader.nextElementSibling;
+                            otherHeader.classList.remove('active');
+                            otherContent.classList.remove('active');
+                            otherContent.style.maxHeight = 0;
+                            otherHeader.querySelector('.icon').style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    // Открываем/закрываем текущий
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+
+                    if (content.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.style.transform = 'rotate(45deg)';
+                        
+                        // Слушаем окончание анимации
+                        if (window.innerWidth <= 768) {
+                        content.addEventListener('transitionend', function onTransitionEnd() {
+                            header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            // Удаляем слушателя, чтобы он не срабатывал повторно
+                            content.removeEventListener('transitionend', onTransitionEnd);
+                        });
+                      };
+                    } else {
+                        content.style.maxHeight = 0;
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        };
     </script>
 {% endblock %}
