@@ -1,0 +1,303 @@
+/* profile.css */
+
+/*
+  ----------------------------------------------------
+  Основные стили страницы и контейнеров
+  ----------------------------------------------------
+*/
+.profile-page {
+    background-color: #f3f9fb;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Стили для карточек */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для заголовков
+  ----------------------------------------------------
+*/
+.profile-title,
+.orders-title {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.orders-title {
+    margin-top: 40px;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для карточки с деталями профиля
+  ----------------------------------------------------
+*/
+.profile-details-card p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.profile-details-card strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Стили для формы изменения номера телефона */
+.phone-display-container {
+    margin-bottom: 10px;
+}
+
+.edit-form-hidden {
+    display: none;
+}
+
+.edit-form-visible {
+    display: block;
+    margin-top: 20px;
+}
+
+#phone-update-form .form-group {
+    margin-bottom: 15px;
+}
+
+#phone-update-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+#phone-update-form .form-group input[type="text"],
+#phone-update-form .form-group input[type="tel"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+#phone-update-form .form-group input[type="text"]:focus,
+#phone-update-form .form-group input[type="tel"]:focus {
+    outline: none;
+    border-color: #54b3d6;
+    box-shadow: 0 0 0 3px rgba(84, 179, 214, 0.2);
+}
+
+/*
+  ----------------------------------------------------
+  Стили для сообщений (успех/ошибка)
+  ----------------------------------------------------
+*/
+#message-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.success-message {
+    color: #4CAF50; /* Зеленый цвет */
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.error-message {
+    color: #f44336; /* Красный цвет */
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Стили для ссылки "Изменить" */
+.link-edit-phone {
+    font-size: 14px;
+    color: #888;
+    text-decoration: none; /* Убираем подчеркивание */
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.link-edit-phone:hover {
+    color: #54b3d6;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для кнопок и ссылок
+  ----------------------------------------------------
+*/
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #54b3d6;
+    color: #fff;
+    border: none;
+    margin-right: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #439bb8;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+    background-color: #d4d4d4;
+    transform: translateY(-2px);
+}
+
+.btn-logout-small {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 14px;
+    color: #888;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.btn-logout-small:hover {
+    color: #f44336;
+    
+}
+
+.link-home {
+    color: #54b3d6;
+    text-decoration: none; /* Убираем подчеркивание */
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+
+
+.link-details {
+    color: #54b3d6;
+    text-decoration: none; /* Убираем подчеркивание */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+
+
+/* Контейнер для кнопок внизу */
+.profile-actions-bottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для таблицы заказов
+  ----------------------------------------------------
+*/
+.orders-table-container {
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.orders-table th {
+    background-color: #54b3d6;
+    color: #fff;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+.orders-table th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.orders-table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.orders-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.orders-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.no-orders {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 20px;
+}
+
+/*
+  ----------------------------------------------------
+  Адаптация для мобильных устройств
+  ----------------------------------------------------
+*/
+@media (max-width: 768px) {
+    .profile-page {
+        padding: 20px 10px;
+    }
+
+    .profile-actions-bottom {
+        flex-direction: column;
+        align-items: center;
+    }
+}

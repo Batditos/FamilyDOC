@@ -1,0 +1,218 @@
+/* login.css */
+
+/* Основной контейнер страницы входа */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Заголовок формы */
+.form-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Контейнер самой формы */
+.login-form {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* Стили для блока сообщений Django */
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.message-item {
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+    word-wrap: break-word; 
+}
+
+.message-item:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+/* Стили для сообщения об ошибке (красный цвет) */
+.message-error {
+    background-color: #fce4e4;
+    color: #e53935;
+    border: 1px solid #e53935;
+}
+
+/* Стили для сообщения об успешном действии (зеленый цвет) */
+.message-success {
+    background-color: #e8f5e9;
+    color: #43a047;
+    border: 1px solid #43a047;
+}
+
+/* Группа для полей формы */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Общие стили для всех полей ввода */
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    background-color: #f3f9fb;
+}
+
+/* Метки полей */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Фокус на полях ввода */
+.form-group input:focus {
+    outline: none;
+    border-color: #54b3d6;
+    box-shadow: 0 0 0 3px rgba(84, 179, 214, 0.2);
+}
+
+/* Контейнер для поля ввода и иконки глаза */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    padding-right: 50px; /* Отступ для кнопки-глаза */
+}
+
+/* Кнопка переключения видимости пароля */
+.toggle-password-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.toggle-password-btn:hover {
+    color: #54b3d6;
+}
+
+.toggle-password-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Основная кнопка "Сохранить" */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #54b3d6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #4390b0;
+}
+
+/* Группа ссылок */
+.links-group {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Стили для ссылок */
+.link, .link-home {
+    color: #54b3d6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.link:hover, .link-home:hover {
+    color: #3a8baa;
+}
+
+.link-home {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+/* Стили для ошибок полей */
+.field-error {
+    color: #e53935;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+/* Стили для контейнера сообщений (для "Ссылка отправлена") */
+.message-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.message-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+    .login-page {
+        padding-top: 60px;
+        justify-content: flex-start;
+    }
+}

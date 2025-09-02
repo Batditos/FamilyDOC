@@ -1,63 +1,71 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Вход</title>
-</head>
-<body>
-    <h2>Вход</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Войти</button>
-        <a href="{% url 'users:register' %}">Регистрация</a>
-        <a href="{% url 'users:password_reset_request' %}">Забыл пароль</a>
-    </form>
-</body>
-</html> -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Вход</title>
-</head>
-<body>
-    <h2>Вход</h2>
-    <form method="post">
-        {% csrf_token %}
-        
-        <p>
-            <label for="id_password">Пароль:</label>
-            <input type="password" name="password" id="id_password" required>
-            <button type="button" id="togglePassword" aria-label="Показать пароль" style="margin-left: 10px;">👁️</button>
-        </p>
+{% extends "base.html" %}
+{% load static %}
 
-        {% for field in form %}
-          {% if field.name != 'password' %}
-            {{ field }}
-          {% endif %}
-        {% endfor %}
-        
-        <button type="submit">Войти</button>
-        <a href="{% url 'users:register' %}">Регистрация</a>
-        <a href="{% url 'users:password_reset_request' %}">Забыл пароль</a>
-        <a href="/"> Главная страница</a>
-    </form>
+{% block title %}Вход{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="login-page">
+        <h2 class="form-title">Войти в личный кабинет</h2>
+        <form method="post" class="login-form">
+            {% csrf_token %}
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="message-item message-{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% for field in form %}
+                {% if field.name == 'password' %}
+                    <div class="form-group password-field">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        <div class="input-with-icon">
+                            {{ field }}
+                            <button type="button" id="togglePassword" aria-label="Показать пароль" class="toggle-password-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7.27 4.5 3 7.55 3 12s4.27 7.5 9 7.5 9-3.05 9-7.5-4.27-7.5-9-7.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <button type="submit" class="btn-primary">Войти</button>
+
+            <div class="links-group">
+                <a href="{% url 'users:register' %}" class="link">Регистрация</a>
+                <a href="{% url 'users:password_reset_request' %}" class="link">Забыл пароль?</a>
+            </div>
+            
+            <a href="/" class="link-home">Главная страница</a>
+        </form>
+    </main>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-  const passwordInput = document.getElementById('id_password');
-  const toggleBtn = document.getElementById('togglePassword');
+    document.addEventListener('DOMContentLoaded', () => {
+        const passwordInput = document.getElementById('id_password');
+        const toggleBtn = document.getElementById('togglePassword');
 
-  toggleBtn.addEventListener('mousedown', () => {
-    passwordInput.type = 'text';
-  });
-
-  toggleBtn.addEventListener('mouseup', () => {
-    passwordInput.type = 'password';
-  });
-
-  toggleBtn.addEventListener('mouseleave', () => {
-    // Если курсор ушёл с кнопки, скрываем пароль
-    passwordInput.type = 'password';
-  });
+        if (passwordInput && toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                toggleBtn.classList.toggle('active');
+            });
+        }
+    });
 </script>
-</body>
-</html>
+{% endblock %}

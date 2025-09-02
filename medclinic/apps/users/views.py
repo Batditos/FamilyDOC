@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.tokens import default_token_generator
@@ -16,15 +17,14 @@ from .forms import PhoneUpdateForm
 
 def register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('login/')
+         form = CustomUserCreationForm(request.POST)
+         if form.is_valid():
+             user = form.save()
+             login(request, user)
+         return redirect('users:profile') 
     else:
-        form = CustomUserCreationForm()
+     form = CustomUserCreationForm()
     return render(request, 'users/register.html', {'form': form})
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -33,10 +33,11 @@ def user_login(request):
             user = form.cleaned_data['user']
             login(request, user)
             return redirect('users:profile')
+        else:
+            messages.error(request, 'Неправильный логин или пароль.')
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
-
 
 @login_required
 def user_logout(request):
@@ -52,7 +53,7 @@ def password_reset_request(request):
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             reset_url = request.build_absolute_uri(
-                reverse('users:password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
+            reverse('users:password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
             )
             # In a real app, send reset_url via email/SMS
             return render(request, 'users/reset_sent.html', {'reset_url': reset_url})
@@ -72,7 +73,7 @@ def password_reset_confirm(request, uidb64, token):
             form = PasswordResetConfirmForm(user, request.POST)
             if form.is_valid():
                 form.save()
-                login(request, user)  # Log in user after reset
+                login(request, user) 
                 return redirect('users:profile')
         else:
             form = PasswordResetConfirmForm(user)
@@ -81,45 +82,52 @@ def password_reset_confirm(request, uidb64, token):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html', {'user': request.user})
-
-@login_required
-def update_phone(request):
+    """
+    Личный кабинет пользователя с возможностью редактирования телефона 
+    и просмотра списка заказов.
+    """
     if request.method == 'POST':
         form = PhoneUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Номер телефона обновлен.')
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': True, 'new_phone_number': request.user.phone_number})
+            messages.success(request, 'Номер телефона успешно изменен.')
             return redirect('users:profile')
         else:
-            messages.error(request, 'Ошибка обновления номера телефона.')
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                errors = form.errors.get_json_data()
+                return JsonResponse({'success': False, 'errors': errors})
+
+    # При GET-запросе или при ошибке POST-запроса
     else:
         form = PhoneUpdateForm(instance=request.user)
-    return render(request, 'users/update_phone.html', {'form': form})
 
-@login_required
-def profile(request):
-    user = request.user
-    # Получаем заказы текущего пользователя
-    orders = Order.objects.filter(user=user).order_by('-created_at')
-    return render(request, "users/profile.html", {"user": user,"orders": orders,})
+    # Получаем заказы текущего пользователя. Этот код выполняется всегда.
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    
+    context = {
+        'user': request.user,
+        'form': form,
+        'orders': orders
+    }
+    
+    return render(request, 'users/profile.html', context)
 
-@login_required
+
 def order_detail(request, order_id):
-    """
-    Подробная информация о заказе пользователя.
-    """
+    """Подробная информация о заказе пользователя."""
     order = get_object_or_404(Order, pk=order_id, user=request.user)
     return render(request, "orders/order_detail.html", {"order": order})
 
 
 
 @login_required
+# @staff_member_required
 def admin_profile(request):
-    return render(request, 'users/admin_profile.html', {'user': request.user})
-
-@login_required
-def admin_profile(request):
+    """
+    Профиль администратора с общей статистикой и заказами.
+    """
     # Все заказы, отсортированные по дате
     orders_all = Order.objects.all().order_by('-created_at')
     
@@ -128,7 +136,7 @@ def admin_profile(request):
         OrderItem.objects
         .values('name','price')
         .annotate(order_count=Count('order', distinct=True))
-        .order_by('-order_count')[:5]  # топ 5
+        .order_by('-order_count')[:5] 
     )
 
     context = {

@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ссылка для сброса пароля</title>
-</head>
-<body>
-    <h2>Ссылка для сброса пароля</h2>
-    <p>Перейдите по ссылке для сброса пароля: <a href="{{ reset_url }}">{{ reset_url }}</a></p>
-    <p><a href="{% url 'users:login' %}">Вернуться на вход</a></p>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Ссылка для сброса пароля{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+ 
+{% block content %}
+    <main class="login-page">
+        <h2 class="form-title">Ссылка для сброса пароля</h2>
+        <div class="message-container">
+            <p class="message-text">Мы отправили вам ссылку для сброса пароля на вашу почту. Пожалуйста, проверьте ее.</p>
+            
+        </div>
+        <div class="links-group">
+            
+            <a href="{% url 'users:login' %}" class="link">Вернуться на вход</a>
+            <a href="{{ reset_url }}" class="link">Cсылка для смены пароля: {{ reset_url }}</a>
+        </div>
+    </main>
+{% endblock %}

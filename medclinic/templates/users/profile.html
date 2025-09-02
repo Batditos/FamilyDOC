@@ -1,36 +1,152 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-    <h2>Личный кабинет</h2>
-    <p><strong>ФИО:</strong> {{ user.last_name }} {{ user.first_name }} {{ user.patronymic }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Телефон:</strong> {{ user.phone_number }}</p>
-    <p><a href="{% url 'users:update_phone' %}">Изменить номер телефона</a></p>
-    <p><a href="{% url 'users:logout' %}">Выйти</a></p>
-    <p><a href="{% url 'core:home' %}">Главная страница</a></p>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
 
-    <h1>Мои заказы</h1>
-    <table border="1">
-        <tr>
-            <th>Номер заказа</th>
-            <th>Сумма</th>
-            <th>Дата/Время</th>
-            <th>Действие</th>
-        </tr>
-        {% for order in orders %}
-        <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.total_price }}</td>
-            <td>{{ order.created_at }}</td>
-            <td><a href="{% url 'orders:order_detail' order.id %}">Подробнее</a></td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">У вас пока нет заказов</td>
-        </tr>
-        {% endfor %}
-    </table>
-    
-    
+{% block content %}
+    <main class="profile-page">
+        <div class="profile-container">
+            <h2 class="profile-title">Личный кабинет</h2>
+
+            <div class="profile-details-card card">
+                <a href="{% url 'users:logout' %}" class="btn-logout-small">Выйти</a>
+                <p><strong>ФИО:</strong> {{ user.last_name }} {{ user.first_name }} {{ user.patronymic }}</p>
+                <p><strong>Дата рождения:</strong> {{ user.get_gender_display }}</p>
+                <p><strong>Номер телефона:</strong> {{ user.birth_date }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                
+                
+                <div class="phone-display-container">
+                    <p>
+                        <strong>Телефон:</strong> <span id="phone-number-value">{{ user.phone_number }}</span>
+                        <a href="#" id="edit-phone-btn" class="link-edit-phone">Изменить</a>
+                    </p>
+                </div>
+
+                <div id="edit-phone-form-container" class="edit-form-hidden">
+                    <form method="post" id="phone-update-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.phone_number.id_for_label }}">Новый номер телефона:</label>
+                            {{ form.phone_number }}
+                            {% if form.phone_number.errors %}
+                                <div class="error-message">
+                                    {% for error in form.phone_number.errors %}<p>{{ error }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Отмена</button>
+                    </form>
+                </div>
+                
+                <div id="message-container"></div>
+            </div>
+
+            <div class="profile-actions-bottom">
+                <a href="{% url 'core:home' %}" class="link-home">Главная страница</a>
+            </div>
+
+            <h2 class="orders-title">Мои заказы</h2>
+            <div class="orders-table-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Номер заказа</th>
+                            <th>Сумма</th>
+                            <th>Дата/Время</th>
+                            <th>Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr class="order-item">
+                            <td>#{{ order.id }}</td>
+                            <td>{{ order.total_price }} руб.</td>
+                            <td>{{ order.created_at }}</td>
+                            <td><a href="{% url 'orders:order_detail' order.id %}" class="link-details">Подробнее</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="no-orders">У вас пока нет заказов</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editBtn = document.getElementById('edit-phone-btn');
+            const cancelBtn = document.getElementById('cancel-edit-btn');
+            const formContainer = document.getElementById('edit-phone-form-container');
+            const phoneDisplayContainer = document.querySelector('.phone-display-container');
+            const phoneUpdateForm = document.getElementById('phone-update-form');
+            const phoneNumberValue = document.getElementById('phone-number-value');
+            const messageContainer = document.getElementById('message-container');
+
+            function showEditForm() {
+                phoneDisplayContainer.style.display = 'none';
+                formContainer.classList.remove('edit-form-hidden');
+                formContainer.classList.add('edit-form-visible');
+            }
+
+            function hideEditForm() {
+                formContainer.classList.remove('edit-form-visible');
+                formContainer.classList.add('edit-form-hidden');
+                phoneDisplayContainer.style.display = 'block';
+            }
+
+            editBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                showEditForm();
+            });
+
+            cancelBtn.addEventListener('click', function() {
+                hideEditForm();
+                messageContainer.innerHTML = '';
+            });
+
+            phoneUpdateForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(phoneUpdateForm);
+
+                fetch(phoneUpdateForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    messageContainer.innerHTML = '';
+
+                    if (data.success) {
+                        phoneNumberValue.textContent = data.new_phone_number;
+                        hideEditForm();
+                        messageContainer.innerHTML = '<p class="success-message">Номер телефона успешно изменен.</p>';
+                    } else {
+                        if (data.errors) {
+                            for (const field in data.errors) {
+                                data.errors[field].forEach(error => {
+                                    const errorMessage = (typeof error === 'object' && error.message) ? error.message : error;
+                                    messageContainer.innerHTML += `<p class="error-message">${errorMessage}</p>`;
+                                });
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    messageContainer.innerHTML = '<p class="error-message">Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова.</p>';
+                });
+            });
+        });
+    </script>
 {% endblock %}

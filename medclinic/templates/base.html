@@ -14,6 +14,7 @@
     <!-- Подключение основного файла стилей, использующего БЭМ и Mobile-first -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+     
     
     {% block extra_css %}{% endblock %}
 </head>
@@ -44,9 +45,9 @@
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
                
                 {% if user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link">Профиль</a></li>
+                    <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link">Личный кабинет</a></li>
                 {% else %}
-                    <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Личный кабинет</a></li>
+                    <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Вход в личный кабинет</a></li>
                 {% endif %}
                 <li> <a href="{% url 'cart:cart_detail' %}" class="header__action-link header__action-link--cart" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
@@ -56,7 +57,7 @@
         
            
            
-           
+           <a href="{% url 'cart:cart_detail' %}" class="header__action-btn header__action-btn--burger" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a>
             <button id="burger-btn" class="header__action-btn header__action-btn--burger" aria-label="Открыть меню" aria-expanded="false">
                 <svg class="hamburger-icon" viewBox="0 0 100 100" width="44" onclick="this.parentElement.classList.toggle('is-open')">
                     <path class="hamburger-icon__line--top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
@@ -89,7 +90,7 @@
                 <ul class="mobile-menu__submenu">
                     <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Каталог анализов</a></li>
                     <li class="mobile-menu__submenu-item"><a href="{% url 'services:drip_list' %}" class="mobile-menu__submenu-link">Каталог капельниц</a></li>
-                    <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Pfgbcm </a></li>
+                    
                 </ul>
             </li>
             <li class="mobile-menu__item mobile-menu__item--has-sub">

@@ -1,0 +1,229 @@
+/* registration.css */
+
+/*
+  ----------------------------------------------------
+  Базовые стили для всей страницы
+  ----------------------------------------------------
+*/
+body {
+    background-color: #f3f9fb;
+}
+button, input {
+    margin: 0;
+    padding: 0;
+}
+/* Контейнер основной страницы входа/регистрации 
+*/
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Общие стили для формы 
+*/
+.login-form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Ограничиваем максимальную ширину формы на десктопах */
+    box-sizing: border-box;
+}
+
+/* Стили для заголовка формы 
+*/
+.form-title {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для полей формы с использованием Grid
+  ----------------------------------------------------
+*/
+
+/* Контейнер для полей, использующий CSS Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Одна колонка по умолчанию (для мобильных) */
+    gap: 15px; /* Уменьшенное расстояние между полями */
+    width: 100%;
+}
+
+/* Элемент, который занимает всю ширину в сетке */
+.grid-item-full-width {
+    grid-column: 1 / -1; /* Занимает всю ширину сетки (одну колонку) */
+}
+
+/* Общие стили для контейнера каждого поля (label + input) 
+*/
+.form-group {
+    margin-bottom: 0;
+}
+
+/*
+  Стили для всех полей ввода и select
+*/
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Универсальные стили для всех полей ввода
+*/
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    background-color: #f3f9fb;
+    color: #333;
+    -webkit-appearance: none
+}
+
+/* /* Стили для поля "Дата рождения", чтобы избежать сужения на мобильных
+*/
+.form-group input[type="date"] {
+    min-width: 100%;
+    height: 44px;
+    
+   
+}  */
+
+/* Фокус на полях ввода 
+*/
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #54b3d6;
+    box-shadow: 0 0 0 3px rgba(84, 179, 214, 0.2);
+}
+
+/* Стили для select, чтобы убрать стандартные стрелки 
+*/
+.form-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23888888" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для кнопок и ссылок
+  ----------------------------------------------------
+*/
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background-color: #54b3d6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 25px;
+}
+
+.btn-primary:hover {
+    background-color: #439bb8;
+    transform: translateY(-2px);
+}
+
+.links-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.link, .link-home {
+    color: #54b3d6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.link:hover, .link-home:hover {
+    text-decoration: underline;
+}
+
+/*
+  ----------------------------------------------------
+  Стили для полей с иконкой (пароль, дата)
+  ----------------------------------------------------
+*/
+.input-with-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon input {
+    padding-right: 40px; /* Отступ для иконки */
+}
+
+/* Стиль для кнопки-иконки внутри поля */
+.toggle-password-btn,
+.date-picker-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.toggle-password-btn:hover {
+    color: #54b3d6;
+}
+
+/*
+  ----------------------------------------------------
+  Адаптация для десктопов
+  ----------------------------------------------------
+*/
+@media (min-width: 769px) {
+    .login-form {
+        max-width: 800px; /* Увеличиваем ширину формы на больших экранах */
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr 1fr; /* Две колонки на десктопах */
+        gap: 20px; /* Увеличиваем расстояние между колонками */
+    }
+
+    /* Элемент, который занимает всю ширину в сетке на десктопах */
+    .grid-item-full-width {
+        grid-column: span 2;
+    }
+
+    /* Сбрасываем min-width для поля даты, чтобы оно вело себя как обычное поле */
+    .form-group input[type="date"] {
+        min-width: auto;
+    }
+}

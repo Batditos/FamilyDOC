@@ -94,9 +94,23 @@ class PasswordResetRequestForm(forms.Form):
         return login
 
 class PasswordResetConfirmForm(SetPasswordForm):
-    new_password1 = forms.CharField(widget=forms.PasswordInput, label='Новый пароль')
-    new_password2 = forms.CharField(widget=forms.PasswordInput, label='Подтверждение пароля')
-    
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput,
+        label=('Новый пароль'),
+        error_messages={
+            'password_too_short': ('Этот пароль слишком короткий. Он должен содержать как минимум 8 символов.'),
+            'password_common': ('Введенный пароль слишком широко распространен.'),
+            'password_entirely_numeric':('Ваш пароль не может состоять только из цифр.')
+        }
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput,
+        label=('Подтверждение пароля'),
+        error_messages={
+            'required': ('Это поле обязательно для заполнения.'),
+            'min_length': ('Этот пароль слишком короткий. Он должен содержать как минимум 8 символов.')
+        }
+    )
 class PhoneUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
