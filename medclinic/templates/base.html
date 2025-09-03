@@ -7,28 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ title|default:"Falimy DOC" }}{% endblock %}</title>
 
-    <!-- Подключение стилей, Font Awesome и других необходимых файлов -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Подключение основного файла стилей, использующего БЭМ и Mobile-first -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-     
     
     {% block extra_css %}{% endblock %}
 </head>
 <body >
-<!-- class="no-scroll" -->
 <header class="header">
-    
     <div class="header__container container">
         <a href="/" class="header__logo-link">
             <div class="header__logo">Family :<span class="header__logo--sub">DOC</span><span class="header__logo--slogan">Всегда рядом</span></div>
             <div class="header__logo--info">Медицинская клиника-партнер НИИ Эпидемиологии и Роспотребнадзора CMD </div>
         </a>
         <div><p class="contact">+7 (903) 224 6322</p></div>
-        <!-- Основное навигационное меню -->
         <nav class="header__nav header__nav--desktop" aria-label="Главное меню">
             <ul class="nav-list">
                 <li class="nav-item"><a href="{% url 'users:admin_profile' %}" class="nav-link">О нас</a></li>
@@ -43,35 +37,29 @@
                 <li class="nav-item"><a href="#" class="nav-link">Подписки</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">FAQ</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
-               
+                
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link">Личный кабинет</a></li>
                 {% else %}
                     <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Вход в личный кабинет</a></li>
                 {% endif %}
-                <li> <a href="{% url 'cart:cart_detail' %}" class="header__action-link header__action-link--cart" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a></li>
+                {% comment %} <li class="nav-item"><a href="{% url 'cart:cart_detail' %}" class="nav-link header__action-link--cart" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a></li> {% endcomment %}
             </ul>
         </nav>
         
-        <!-- Навигация и элементы для мобильной/десктопной версии -->
-        
-           
-           
-           <a href="{% url 'cart:cart_detail' %}" class="header__action-btn header__action-btn--burger" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a>
-            <button id="burger-btn" class="header__action-btn header__action-btn--burger" aria-label="Открыть меню" aria-expanded="false">
-                <svg class="hamburger-icon" viewBox="0 0 100 100" width="44" onclick="this.parentElement.classList.toggle('is-open')">
+        <div class="header__actions">
+            <a href="{% url 'cart:cart_detail' %}" class="header__action-btn header__action-btn--cart" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a>
+            <button id="burger-btn" class="header__action-btn header__action-btn--menu" aria-label="Открыть меню" aria-expanded="false">
+                <svg class="hamburger-icon" viewBox="0 0 100 100" width="44">
                     <path class="hamburger-icon__line--top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
                     <path class="hamburger-icon__line--middle" d="m 70,50 h -40" />
                     <path class="hamburger-icon__line--bottom" d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
                 </svg>
-
             </button>
-        
+        </div>
     </div>
-    
 </header>
 
-<!-- Модальное окно поиска -->
 <div id="search-modal" class="modal" role="dialog" aria-modal="true">
     <div class="modal__content">
         <span class="modal__close-btn" aria-label="Закрыть">&times;</span>
@@ -80,7 +68,6 @@
     </div>
 </div>
 
-<!-- Мобильное боковое меню -->
 <nav id="mobile-menu" class="mobile-menu" aria-label="Мобильное меню">
     <div class="mobile-menu__content">
         <ul class="mobile-menu__list">
@@ -101,7 +88,7 @@
                     <li class="mobile-menu__submenu-item"><a href="/" class="mobile-menu__submenu-link">Special</a></li>
                 </ul>
             </li>
-           
+            
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Результаты анализов</a></li>
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">FAQ</a></li>
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">О нас</a></li>
@@ -117,6 +104,8 @@
         </div>
     </div>
 </nav>
+
+<div id="overlay" class="overlay"></div>
 
 <main class="main-content-padding main__container">
     {% block content %}{% endblock %}

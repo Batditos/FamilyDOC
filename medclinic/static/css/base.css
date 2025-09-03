@@ -1,9 +1,18 @@
-/* * base.css: A foundational CSS file using the BEM methodology and a Mobile-first approach.
- * It establishes global styles, a responsive grid system, and essential UI components.
- */
+/*=============================================================================
+  BASE STYLES: Общие и сброс
+  =============================================================================*/
+:root {
+    --primary-color: #54b3d6;
+    --text-color: #333;
+    --light-text-color: #bcbcbc;
+    --border-color: #ddd;
+    --background-color: #f8f8f8;
+    --secondary-bg-color: #fafafa;
+}
 
-/* General and reset styles */
 * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -12,40 +21,44 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: Century Gothic, sans-serif;
+    font-family: 'Century Gothic', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f8f8;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 body.no-scroll {
     overflow: hidden;
 }
 
-/* Universal container for responsive layouts */
+/* Универсальный контейнер для адаптивных макетов */
 .container {
     width: 100%;
-    /* max-width: 1450px;
+    max-width: 1450px;
     margin: 0 auto;
-    padding: 0 15px; Adds horizontal padding for mobile devices */
+    padding: 0 15px;
 }
 
-/* Header styles */
+/*=============================================================================
+  HEADER BLOCK
+  =============================================================================*/
 .header {
-    position: fixed; /* Header is now fixed at the top */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    z-index: 1000; /* Ensures the header is always on top */
+    z-index: 1000;
 }
 
 .header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px 10px 10px;
+    padding: 10px 15px;
 }
 
 .header__logo-link {
@@ -56,26 +69,30 @@ body.no-scroll {
 .header__logo {
     font-weight: bold;
     font-size: 24px;
-    color: #333;
+    color: var(--text-color);
 }
 
-.header__logo .header__logo--sub {
-    color: #54b3d6;
+.header__logo--sub {
+    color: var(--primary-color);
 }
-.header__logo--slogan{
-    color: #bcbcbc;
+
+.header__logo--slogan {
+    color: var(--light-text-color);
     font-size: 8px;
     padding-left: 2px;
 }
+
 .header__logo--info {
     padding: 0;
     margin: 0;
     color: #000;
     font-size: 8px;
 }
+
 .contact {
     display: none;
 }
+
 .header__nav--desktop {
     display: none;
 }
@@ -92,37 +109,55 @@ body.no-scroll {
     border: none;
     cursor: pointer;
     font-size: 20px;
-    color: #555;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.header__action-btn--burger {
-    display: block;
-}
+/* Раскрашиваем иконку корзины в фирменный цвет */
+.header__action-btn--cart,
 .header__action-link--cart {
+    color: var(--primary-color);
+}
+
+.header__action-btn--menu {
     display: block;
 }
-/* Mobile menu */
+
+/*=============================================================================
+  MOBILE MENU BLOCK
+  =============================================================================*/
 .mobile-menu {
     position: fixed;
-    top: 60px; /* Adjusted to match header height */
+    top: 60px;
     left: 0;
-    bottom: 0; /* Ensures it fills the space to the bottom of the screen */
+    bottom: 0;
     width: 100%;
     background-color: #fff;
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    /* Updated transitions for a smoother and more robust hide/show effect */
+    -webkit-transition: -webkit-transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    -moz-transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    -o-transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transform: translateY(-100%); /* Initially hide the menu above the screen */
-    opacity: 0; /* Make it completely transparent */
-    pointer-events: none; /* Prevent any interaction when hidden */
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
     z-index: 999;
 }
 
 .mobile-menu.is-open {
-    transform: translateY(0); /* Slide down to show the menu */
-    opacity: 1; /* Make it visible */
-    pointer-events: auto; /* Enable interaction */
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .mobile-menu__content {
@@ -130,10 +165,140 @@ body.no-scroll {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Allow content to scroll if it's too long */
+    overflow-y: auto;
 }
 
-/* Modal styles */
+.mobile-menu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.mobile-menu__item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.mobile-menu__link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 0;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu__link:hover,
+.mobile-menu__link:focus {
+    color: var(--primary-color);
+}
+
+.mobile-menu__link--accordion {
+    position: relative;
+    padding-right: 40px;
+}
+
+.mobile-menu__link--accordion::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 24px;
+    line-height: 1;
+    color: #555;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    -moz-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu__item.is-open .mobile-menu__link--accordion::after {
+    -webkit-transform: translateY(-50%) rotate(45deg);
+    -moz-transform: translateY(-50%) rotate(45deg);
+    -o-transform: translateY(-50%) rotate(45deg);
+    -ms-transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.mobile-menu__submenu {
+    list-style: none;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.3s ease-in-out;
+    -moz-transition: max-height 0.3s ease-in-out;
+    -o-transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.3s ease-in-out;
+    background-color: var(--secondary-bg-color);
+}
+
+.mobile-menu__submenu.is-open {
+    max-height: 300px;
+}
+
+.mobile-menu__submenu-item a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
+}
+
+.mobile-menu__submenu-item a:hover {
+    background-color: #eee;
+}
+
+.mobile-menu__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.mobile-menu__profile-link {
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+/*=============================================================================
+  MODAL & OVERLAY BLOCKS
+  =============================================================================*/
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -154,6 +319,8 @@ body.no-scroll {
     position: relative;
     width: 90%;
     max-width: 500px;
+    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -168,7 +335,7 @@ body.no-scroll {
 .modal__input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: 16px;
     margin-bottom: 15px;
@@ -185,17 +352,18 @@ body.no-scroll {
     font-size: 16px;
 }
 
-/* Main content padding to clear the fixed header */
 .main-content-padding {
-    padding-top: 60px; /* Adjust this value as needed to match the header's height */
+    padding-top: 60px;
 }
 
-/* Footer styles */
+/*=============================================================================
+  FOOTER BLOCK
+  =============================================================================*/
 .footer {
     background-color: #333;
     color: #fff;
     padding: 40px 0;
-    margin-top: 0; /* Changed to 0 as wave handles separation */
+    margin-top: 0;
 }
 
 .footer__container {
@@ -225,6 +393,9 @@ body.no-scroll {
 .footer__link {
     text-decoration: none;
     color: #ccc;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
     transition: color 0.3s ease;
 }
 
@@ -240,6 +411,9 @@ body.no-scroll {
 .footer__social-link {
     color: #ccc;
     font-size: 24px;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
     transition: color 0.3s ease;
 }
 
@@ -247,125 +421,48 @@ body.no-scroll {
     color: #fff;
 }
 
-/* Updated styles for mobile menu content */
-.mobile-menu__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1; /* This will allow the list to fill available space */
-}
-
-.mobile-menu__item {
-    border-bottom: 1px solid #eee;
-    padding: 15px 0;
-}
-
-.mobile-menu__link {
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 10px 0;
-    transition: color 0.3s ease;
-}
-
-.mobile-menu__link:hover,
-.mobile-menu__link:focus {
-    color: #16a085;
-}
-
-.mobile-menu__link--accordion {
-    position: relative;
-    padding-right: 40px; /* Make space for the icon */
-}
-
-.mobile-menu__link--accordion::after {
-    content: '+';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    line-height: 1;
-    color: #555;
-    transition: transform 0.3s ease;
-}
-
-.mobile-menu__item.is-open .mobile-menu__link--accordion::after {
-    transform: translateY(-50%) rotate(45deg);
-}
-
-.mobile-menu__submenu {
-    list-style: none;
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-    background-color: #fafafa;
-}
-
-.mobile-menu__submenu.is-open {
-    max-height: 200px; /* A value large enough to contain all submenu items */
-}
-
-.mobile-menu__submenu-item a {
-    display: block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #555;
-    text-decoration: none;
-}
-
-.mobile-menu__submenu-item a:hover {
-    background-color: #eee;
-}
-
-.mobile-menu__footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: auto; /* Pushes the footer to the bottom */
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-}
-
-.mobile-menu__profile-link {
-    text-decoration: none;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-}
-/* Styles for the footer wave */
 .footer-wave {
     display: block;
     width: 100%;
-    margin-bottom: -1px; /* Remove the small gap between SVG and footer */
+    margin-bottom: -1px;
 }
 
 .footer-wave path {
-    fill: #333; /* Color of the footer background */
+    fill: #333;
 }
-/* Burger menu SVG styles */
+
+/*=============================================================================
+  BURGER MENU SVG
+  =============================================================================*/
 .hamburger-icon {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    -webkit-transition: -webkit-transform 400ms;
+    -moz-transition: transform 400ms;
+    -o-transition: transform 400ms;
     transition: transform 400ms;
     user-select: none;
-    /* Убраны width и height, так как они задаются в HTML-коде */
-    fill: none; /* Make sure fill is none so strokes are visible */
+    fill: none;
 }
 .hamburger-icon path {
     fill: none;
+    -webkit-transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    -moz-transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    -o-transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
     transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-    stroke: #54b3d6; /* Changed to match other icon colors */
+    stroke: var(--primary-color);
     stroke-width: 5.5;
     stroke-linecap: round;
 }
-.header__action-btn--burger.is-open .hamburger-icon {
+
+.header__action-btn--menu.is-open .hamburger-icon {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
 .hamburger-icon__line--top {
     stroke-dasharray: 40 82;
 }
@@ -375,47 +472,119 @@ body.no-scroll {
 .hamburger-icon__line--bottom {
     stroke-dasharray: 40 161;
 }
-.header__action-btn--burger.is-open .hamburger-icon__line--top {
+
+.header__action-btn--menu.is-open .hamburger-icon__line--top {
     stroke-dasharray: 17 82;
     stroke-dashoffset: -62px;
 }
-.header__action-btn--burger.is-open .hamburger-icon__line--middle {
+.header__action-btn--menu.is-open .hamburger-icon__line--middle {
     stroke-dashoffset: 23px;
 }
-.header__action-btn--burger.is-open .hamburger-icon__line--bottom {
+.header__action-btn--menu.is-open .hamburger-icon__line--bottom {
     stroke-dashoffset: -83px;
 }
-/* Media Queries for Desktop */
-@media (min-width: 768px) {
-    .header__logo {
-    
-    font-size: 35px;
-   
-}
 
-    .header__logo--slogan{
-    padding-left: 10px;
-    font-size: 13px; 
-}
+/*=============================================================================
+  МЕДИА-ЗАПРОСЫ (Подход mobile-first)
+  =============================================================================*/
+/* ПЛАНШЕТЫ: от 768px до 1023px */
+@media (min-width: 768px) and (max-width: 1250px) {
+    /* Настройки хедера для планшетов */
+    .header__logo {
+        font-size: 35px;
+    }
+    .header__logo--slogan {
+        padding-left: 10px;
+        font-size: 13px;
+    }
     .header__logo--info {
         font-size: 10px;
-
     }
     .contact {
-    display: block;
-}
-    .header__nav--desktop {
         display: block;
     }
 
-    .header__action-btn--burger {
+    /* Меню на планшете выезжает справа */
+    .mobile-menu {
+        top: 60px;
+        left: auto;
+        right: 0;
+        width: 33.333%;
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    .mobile-menu.is-open {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -o-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    /* Отображаем иконку корзины и бургер для планшетной версии */
+    .header__action-btn--cart,
+    .header__action-btn--menu {
+        display: block !important;
+    }
+
+    /* Настройки футера для планшетов */
+    .footer__container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+/* ДЕСКТОП: 1024px и выше */
+@media (min-width: 1250px) {
+    /* Настройки хедера для десктопа */
+    .header__logo {
+        font-size: 35px;
+    }
+    .header__logo--slogan {
+        padding-left: 10px;
+        font-size: 13px;
+    }
+    .header__logo--info {
+        font-size: 10px;
+    }
+    .contact {
+        display: block;
+    }
+
+    .header__nav--desktop {
+        display: block;
+    }
+    .header__action-btn--menu {
         display: none;
     }
 
-    .header__actions {
-        gap: 20px;
+    /* Корзина на десктопе */
+    .header__action-btn--cart {
+        display: block;
+        color: var(--primary-color);
+        font-size: 20px;
+        /* Убираем все эффекты наведения */
+        text-decoration: none;
+        background: none;
     }
 
+    /* Скрываем все остальные кнопки действий, кроме корзины и поиска */
+    .header__actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .header__actions .header__action-btn:not(.header__action-btn--cart) {
+        display: none;
+    }
+    
+    /* Навигация для десктопа */
     .nav-list {
         display: flex;
         gap: 25px;
@@ -427,105 +596,153 @@ body.no-scroll {
         position: relative;
     }
 
-    .nav-item--has-sub:hover .nav-submenu {
-        display: block;
+    .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+    }
+    
+    /* Подменю по умолчанию скрыто */
+    .nav-submenu {
+        list-style: none;
+        margin: 0;
+        padding: 0.5rem 0;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        -webkit-transform: translateX(-50%) translateY(20px);
+        -moz-transform: translateX(-50%) translateY(20px);
+        -o-transform: translateX(-50%) translateY(20px);
+        -ms-transform: translateY(-50%) translateY(20px);
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
+        visibility: hidden;
+        background-color: #fff;
+        -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        min-width: 200px;
+        z-index: 10;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
     }
 
-  .nav-link {
-     background-image: linear-gradient( to right, #54b3d6, #54b3d6 50%, #000 50% ); 
-     background-size: 200% 100%; 
-     background-position: -100%; 
-     
-     display: inline-block; 
-     padding: 5px 0; 
-     position: relative; 
-     -webkit-background-clip: 
-     text; -webkit-text-fill-color: 
-     transparent; 
-     transition: all 0.3s ease-in-out; 
-    } 
-     .nav-link:before{ 
-        content: ''; 
-        background: #54b3d6; 
-        display: block; 
-        position: absolute; 
-        bottom: -3px; 
-        left: 0; 
-        width: 0; 
-        height: 3px; 
-        transition: all 0.3s ease-in-out; } .nav-link:hover { background-position: 0; } 
-  .nav-link:hover::before{ width: 100%;}
+    /* Применяем эффекты наведения (hover) только на устройствах с курсором */
+    @media (hover: hover) and (pointer: fine) {
+        .nav-link {
+            background-image: -webkit-linear-gradient(to right, var(--primary-color), var(--primary-color) 50%, #000 50%);
+            background-image: linear-gradient(to right, var(--primary-color), var(--primary-color) 50%, #000 50%);
+            background-size: 200% 100%;
+            background-position: -100%;
+            display: inline-block;
+            padding: 5px 0;
+            position: relative;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease-in-out;
+        }
 
+        .nav-link:hover {
+            background-position: 0;
+        }
 
+        .nav-link:before {
+            content: '';
+            background: var(--primary-color);
+            display: block;
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-item--has-sub:hover .nav-submenu {
+            opacity: 1;
+            visibility: visible;
+            -webkit-transform: translateX(-50%) translateY(0);
+            -moz-transform: translateX(-50%) translateY(0);
+            -o-transform: translateX(-50%) translateY(0);
+            -ms-transform: translateY(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
+    .nav-item--has-sub.is-open .nav-submenu {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transform: translateX(-50%) translateY(0);
+        -moz-transform: translateX(-50%) translateY(0);
+        -o-transform: translateX(-50%) translateY(0);
+        -ms-transform: translateY(-50%) translateY(0);
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    .nav-submenu__link {
+        display: block;
+        padding: 0.75rem 1.25rem;
+        text-decoration: none;
+        color: #4a5568;
+        font-size: 0.9rem;
+        position: relative;
+        overflow: hidden;
+        -webkit-transition: color 0.3s ease-in-out;
+        -moz-transition: color 0.3s ease-in-out;
+        -o-transition: color 0.3s ease-in-out;
+        transition: color 0.3s ease-in-out;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .nav-submenu__link:hover {
+            color: #ffffff;
+            -webkit-transition: color 0.1s ease-in-out;
+            -moz-transition: color 0.1s ease-in-out;
+            -o-transition: color 0.1s ease-in-out;
+            transition: color 0.1s ease-in-out;
+        }
+
+        .nav-submenu__link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            -webkit-transition: -webkit-transform 0.3s ease-in-out;
+            -moz-transition: transform 0.3s ease-in-out;
+            -o-transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out;
+            z-index: 0;
+        }
+
+        .nav-submenu__link:hover:before {
+            -webkit-transform: translateX(100%);
+            -moz-transform: translateX(100%);
+            -o-transform: translateX(100%);
+            -ms-transform: translateX(100%);
+            transform: translateX(100%);
+        }
+
+        .nav-submenu__link > span {
+            position: relative;
+            z-index: 1;
+        }
+    }
+
+    /* Настройки футера для десктопа */
     .footer__container {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
         text-align: left;
     }
-}
-/* Стили для подменю */
-.nav-submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem 0;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    opacity: 0;
-    visibility: hidden; /* Скрывает и делает некликабельным */
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    min-width: 200px;
-    z-index: 10;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Эффект наведения: показывает подменю */
-.nav-item--has-sub:hover .nav-submenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* Стили для ссылок внутри подменю */
-.nav-submenu__link {
-    display: block;
-    padding: 0.75rem 1.25rem;
-    text-decoration: none;
-    color: #4a5568;
-    font-size: 0.9rem;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s ease-in-out;
-}
-
-/* Анимация при наведении на ссылку */
-.nav-submenu__link:hover {
-    color: #ffffff;
-     transition: color 0.1s ease-in-out; 
-}
-
-.nav-submenu__link:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background-color: var(--primary-color, #54b3d6);
-    transition: transform 0.3s ease-in-out;
-    z-index: 0;
-}
-
-.nav-submenu__link:hover:before {
-    transform: translateX(100%);
-}
-
-.nav-submenu__link > span {
-    position: relative;
-    z-index: 1;
 }

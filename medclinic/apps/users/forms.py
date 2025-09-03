@@ -14,7 +14,11 @@ class CustomUserCreationForm(UserCreationForm):
     phone_number = forms.CharField(max_length=15, required=True, label='Номер телефона')
     email = forms.EmailField(required=True, label='Электронная почта')
     gender = forms.ChoiceField(choices=[('male', 'Мужской'), ('female', 'Женский')], required=True, label='Пол')
-    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=True, label='Дата рождения')
+    birth_date = forms.DateField(
+        widget=forms.TextInput(attrs={'class': 'datepicker', 'placeholder': ('ДД.ММ.ГГГГ')}), # Добавляем класс и плейсхолдер
+        required=True,
+        label=('Дата рождения')
+    )
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}), label='Пароль')
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}), label='Подтверждение пароля')
 
