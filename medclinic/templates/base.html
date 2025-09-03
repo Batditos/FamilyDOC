@@ -19,7 +19,7 @@
 <header class="header">
     <div class="header__container container">
         <a href="/" class="header__logo-link">
-            <div class="header__logo">Family :<span class="header__logo--sub">DOC</span><span class="header__logo--slogan">Всегда рядом</span></div>
+            <div class="header__logo">Family <span class="header__logo--dot">:</span><span class="header__logo--sub">DOC</span><span class="header__logo--slogan">Всегда рядом</span></div>
             <div class="header__logo--info">Медицинская клиника-партнер НИИ Эпидемиологии и Роспотребнадзора CMD </div>
         </a>
         <div><p class="contact">+7 (903) 224 6322</p></div>
@@ -35,13 +35,14 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a href="#" class="nav-link">Подписки</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Бизнес-партнерам</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">FAQ</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
                 
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link">Личный кабинет</a></li>
                 {% else %}
-                    <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Вход в личный кабинет</a></li>
+                    <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Личный кабинет</a></li>
                 {% endif %}
                 {% comment %} <li class="nav-item"><a href="{% url 'cart:cart_detail' %}" class="nav-link header__action-link--cart" aria-label="Корзина"><i class="fa fa-shopping-cart"></i></a></li> {% endcomment %}
             </ul>
@@ -72,6 +73,7 @@
     <div class="mobile-menu__content">
         <ul class="mobile-menu__list">
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Запись к врачу</a></li>
+            <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Результаты анализов</a></li>
              <li class="mobile-menu__item mobile-menu__item--has-sub">
                 <a href="#" class="mobile-menu__link mobile-menu__link--accordion">Услуги и цены</a>
                 <ul class="mobile-menu__submenu">
@@ -89,7 +91,8 @@
                 </ul>
             </li>
             
-            <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Результаты анализов</a></li>
+            
+            <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">Бизнес-партнерам</a></li>
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">FAQ</a></li>
             <li class="mobile-menu__item"><a href="/tests" class="mobile-menu__link">О нас</a></li>
             <li class="mobile-menu__item"><a href="{% url 'users:admin_profile' %}" class="mobile-menu__link">Админка</a></li>
