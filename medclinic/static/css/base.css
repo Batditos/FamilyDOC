@@ -91,8 +91,15 @@ body.no-scroll {
 
 .contact {
     display: none;
+    -webkit-text-fill-color: var(--text-color);
+    text-decoration: none;
+    -webkit-text-decoration: none;
 }
-
+.contact p[href^="tel"] {
+    color: inherit; /* или свой цвет, например #000 */
+    text-decoration: none !important;
+    -webkit-text-decoration: none; /* Safari */
+}
 .header__nav--desktop {
     display: none;
 }
@@ -267,7 +274,12 @@ body.no-scroll {
     padding-top: 20px;
     border-top: 1px solid #eee;
 }
-
+.mobile-menu__footer span {
+    -webkit-text-fill-color: var(--text-color);
+    text-decoration: none;
+    -webkit-text-decoration: none;
+    }
+    
 .mobile-menu__profile-link {
     text-decoration: none;
     font-size: 16px;
@@ -487,7 +499,7 @@ body.no-scroll {
 /*=============================================================================
   МЕДИА-ЗАПРОСЫ (Подход mobile-first)
   =============================================================================*/
-/* ПЛАНШЕТЫ: от 768px до 1023px */
+/* ПЛАНШЕТЫ: от 768px до 1250px */
 @media (min-width: 768px) and (max-width: 1250px) {
     /* Настройки хедера для планшетов */
     .header__logo {
