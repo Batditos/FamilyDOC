@@ -1,0 +1,131 @@
+/* ==========================================================================
+  БЛОК: Слайдер (hero-swiper)
+  ========================================================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.hero .swiper {
+  height: 360px;
+}
+.hero .swiper-slide {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+.hero .slide-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.hero .image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #54b3d673;
+}
+.hero .content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  padding: 0 24px;
+}
+.hero h2 {
+  font-size: 28px;
+  margin: 0 0 12px;
+  color: #fff;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 16px;
+  max-width: 560px;
+  margin: 0 auto 20px;
+  color: #fff;
+}
+.hero .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.7;
+}
+.hero .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+.hero .swiper-button-prev,
+.hero .swiper-button-next {
+  display: none;
+}
+/* Планшеты и выше (для экранов от 769px) */
+@media (min-width: 769px) {
+  /* Слайдер */
+  .hero .swiper {
+    height: 580px;
+  }
+  .hero h2 {
+    font-size: 36px;
+  }
+  .hero p {
+    font-size: 18px;
+  }
+  .hero .swiper-button-prev,
+  .hero .swiper-button-next {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
+    transition: background-color 0.3s, -webkit-transform 0.3s;
+    -o-transition: background-color 0.3s, transform 0.3s;
+    -moz-transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, -webkit-transform 0.3s;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin: 0 10px;
+  }
+  .hero .swiper-button-prev::after,
+  .hero .swiper-button-next::after {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+/* Планшеты (для экранов от 769px до 1434px) */
+@media (min-width: 769px) and (max-width: 1434px) {
+  .hero .swiper-button-prev,
+  .hero .swiper-button-next {
+    display: none;
+  }
+}

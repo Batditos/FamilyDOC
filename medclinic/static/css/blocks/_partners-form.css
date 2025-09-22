@@ -1,0 +1,142 @@
+/* ==========================================================================
+  БЛОК: Форма для партнеров (partners-form-section-alt)
+  ========================================================================== */
+.partners-form-section-alt {
+  padding: 40px 0;
+  text-align: center;
+  /* Восстановлен градиентный фон как в оригинале */
+  background: -webkit-linear-gradient(180deg, #b8e0f0, #e9f5fa);
+  background: -moz-linear-gradient(180deg, #b8e0f0, #e9f5fa);
+  background: -o-linear-gradient(180deg, #b8e0f0, #e9f5fa);
+  background: linear-gradient(180deg, #b8e0f0, #e9f5fa);
+}
+
+
+.partners-form-wrapper-alt {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.partners-form-title-alt {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.partners-form-alt {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-group-alt {
+  width: 100%;
+}
+
+.partners-form-alt input {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  font-size: 16px;
+  color: var(--text-color);
+  outline: none;
+  -webkit-transition: border-color 0.3s ease;
+  -moz-transition: border-color 0.3s ease;
+  -o-transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease;
+}
+
+.partners-form-alt input:focus {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.partners-form-alt input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--light-text-color);
+  font-size: 16px;
+}
+.partners-form-alt input::-moz-placeholder { /* Firefox 19+ */
+  color: var(--light-text-color);
+  font-size: 16px;
+}
+.partners-form-alt input:-ms-input-placeholder { /* IE 10+ */
+  color: var(--light-text-color);
+  font-size: 16px;
+}
+.partners-form-alt input:-moz-placeholder { /* Firefox 18- */
+  color: var(--light-text-color);
+  font-size: 16px;
+}
+
+
+.submit-btn-alt {
+  /* Убран градиентный фон, используется сплошной цвет из переменной --primary-color */
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 40px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .submit-btn-alt:hover {
+    /* Немного затемняем цвет при наведении вместо масштабирования */
+    background-color: #4390b0; /* Тот же цвет, что и в других кнопках при hover */
+    -webkit-transform: none; /* Убираем масштабирование */
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+  }
+}
+/* Планшеты и выше (для экранов от 769px) */
+@media (min-width: 769px) {
+  /* Форма для партнеров */
+  .partners-form-title-alt {
+    font-size: 40px;
+  }
+  .partners-form-alt {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    gap: 40px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .form-group-alt {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+  .submit-btn-alt {
+    padding: 12px 40px;
+  }
+}

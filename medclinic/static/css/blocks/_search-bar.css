@@ -1,0 +1,68 @@
+/* ==========================================================================
+  БЛОК: Поиск (search-bar)
+  ========================================================================== */
+.search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+}
+.search-bar input {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.search-button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 18px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .search-button:hover {
+    background-color: #4390b0;
+  }
+}
+.search-button svg {
+  fill: currentColor;
+  width: 20px;
+  height: 20px;
+}

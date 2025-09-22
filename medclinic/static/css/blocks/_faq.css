@@ -1,0 +1,52 @@
+/*
+  ==================================================================================
+  #SECTION: FAQ (Вопросы и ответы)
+  ==================================================================================
+*/
+/* Базовые стили для мобильных устройств */
+.faq {
+    padding: 20px 0;
+}
+.faq__title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.faq__item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+.faq__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    background-color: transparent; /* Убираем фон для мобильных */
+}
+.faq__header h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 10px;
+    color: #333; /* Цвет текста */
+}
+.faq__icon {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+    color: var(--primary-color) /* Цвет иконки */
+}
+.faq__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding: 0 15px;
+}
+.faq__content p {
+    padding-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555; /* Цвет текста ответа */
+}

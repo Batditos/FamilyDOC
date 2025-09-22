@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-   <section class="hero relative">
+    <section class="hero relative">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide slide1">
@@ -32,8 +32,8 @@
                 </div>
 
                 <div class="swiper-slide slide3">
-                  <img class="slide-image" src="{% static 'image/img_2.jpg' %}" alt="Слайд">
-                    <div class="image-overlay"></div>
+                    <img class="slide-image" src="{% static 'image/img_2.jpg' %}" alt="Слайд">
+                     <div class="image-overlay"></div>
                     <div class="content">
                         <h2>Запись к врачу</h2>
                         <p>Пройдите полную диагностику и подберите лечение. Мы собрали для вас лучших специалистов!</p>
@@ -45,20 +45,20 @@
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
         </div>
-        
     </section>
 
-    <div class="container">
+    <div class="page-inner">
         <section class="search-bar">
             <input type="text" placeholder="Поиск анализов...">
             <button class="search-button" aria-label="Найти">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             </button>
         </section>
-        
+        </div>
+        <div class="page-inner">
         <section class="accordion-section">
             <h2 class="accordion-title">Чем мы можем помочь?</h2>
-            
+
             <div class="accordion-item">
                 <div class="accordion-header">
                      <img src="{% static 'image/doctor.png' %}" alt="Слайд"><h3>Консультация и поддержка</h3>
@@ -84,7 +84,7 @@
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                  <img src="{% static 'image/heart.png' %}" alt="Слайд">
+                    <img src="{% static 'image/heart.png' %}" alt="Слайд">
                     <h3>Анализы и обследования</h3>
                     <span class="icon">+</span>
                 </div>
@@ -104,7 +104,7 @@
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                  <img src="{% static 'image/first-aid_box.png' %}" alt="Слайд">
+                    <img src="{% static 'image/first-aid_box.png' %}" alt="Слайд">
                     <h3>Дополнительные услуги</h3>
                     <span class="icon">+</span>
                 </div>
@@ -116,11 +116,12 @@
                 </div>
             </div>
         </section>
+        </div>
+        
         <div class="specialist-title-wrapper">
-        <h2 class="specialist-title">Запись к специалисту или на процедуру</h2>
-    </div>
-    
-    <div class="container">
+            <h2 class="specialist-title">Запись к специалисту или на процедуру</h2>
+        </div>
+        <div class="page-inner">
         <section class="specialist-section">
             <div class="specialist-grid">
                 <a href="#" class="specialist-card"><h4>стоматолог</h4></a>
@@ -140,128 +141,525 @@
                 <a href="#" class="specialist-card"><h4>анализы</h4></a>
             </div>
         </section>
-        <section class="popular-section">
-    <div class="container popular-container">
-        <h2 class="section-title">Популярные анализы и капельницы</h2>
-        <div class="swiper popular-swiper">
-            <div class="swiper-wrapper">
-                {% for item in popular %}
-                <div class="swiper-slide card-slide">
-                    <div class="card">
-                        <div class="item-code">{{ item.code }}</div>
-                        <h3 class="item-title">{{ item.name }}</h3>
-                        <div class="item-details">
-                            <span class="item-price">{{ item.price }} p.</span>
-                            <form action="{% url 'cart:cart_add' item.id %}" method="post" style="display:inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="add-to-cart-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-                                </button>
-                            </form>
+        </div>
+    </div>
+    <section class="popular-section">
+        <div class="page-inner popular-container">
+            <h2 class="section-title">Популярные анализы и капельницы</h2>
+            <div class="swiper popular-swiper">
+                <div class="swiper-wrapper">
+                    {% for item in popular %}
+                    <div class="swiper-slide card-slide">
+                        <div class="card">
+                            <div class="item-code">{{ item.code }}</div>
+                            <h3 class="item-title">{{ item.name }}</h3>
+                            <div class="item-details">
+                                <span class="item-price">{{ item.price }} p.</span>
+                                <form action="{% url 'cart:cart_add' item.id %}" method="post" style="display:inline;">
+                                     {% csrf_token %}
+                                     <button type="submit" class="add-to-cart-btn">
+                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                                     </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                <div class="swiper-button-prev popular-swiper-prev"></div>
+                <div class="swiper-button-next popular-swiper-next"></div>
             </div>
-            <div class="swiper-button-prev popular-swiper-prev"></div>
-            <div class="swiper-button-next popular-swiper-next"></div>
+        </div>
+    </section>
+<section id="subscriptions-section__anchor" class="subscriptions-section">
+   
+        <div class="specialist-title-wrapper">
+            <h2 class="specialist-title">Подписки</h2>
+        </div>
+         <div class="page-inner">
+        <div class="subscriptions-grid">
+            <div class="subscriptions-title">
+                <div class="subscription-accordion-header">
+                    <h3>Дежурный врач</h3>
+                    <div class="icon">+</div>
+                </div>
+                <div class="subscription-card basic-card">
+                    <h3 class="subscription-title">Дежурный врач</h3>
+                    <ul class="features-list">
+                        <li>чат с дежурным врачом по любым вопросам здоровья,</li>
+                        <li>выдача направлений на анализы,</li>
+                        <li>снятие острых состояний.</li>
+                    </ul>
+                    <div class="price-action">
+                        <a href="#" class="btn purchase-btn">оформить</a>
+                        <span class="price">999 руб./мес.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subscriptions-title">
+                <div class="subscription-accordion-header">
+                    <h3>Light</h3>
+                    <div class="icon">+</div>
+                </div>
+                <div class="subscription-card basic-card">
+                    <h3 class="subscription-title">Light</h3>
+                    <ul class="features-list">
+                        
+                        <li>аудио и видео консультации,</li>
+                        <li>расшифровка анализов, установка,</li>
+                        <li>предварительного диагноза,</li>
+                        <li>рекомендации по приему препаратов.</li>
+                    </ul>
+                    <div class="price-action">
+                        <a href="#" class="btn purchase-btn">оформить</a>
+                        <span class="price">2 999 руб./мес.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subscriptions-title">
+                <div class="subscription-accordion-header">
+                    <h3>Special</h3>
+                    <div class="icon">+</div>
+                </div>
+                <div class="subscription-card basic-card">
+                    <h3 class="subscription-title">Special</h3>
+                    <ul class="features-list">
+                        <li>аудио и видео консультации,</li>
+                        <li>чат соп ровождение с доктором консультации со смежными специалистами,</li>
+                        <li>подбор препаратов в индивидуальную аптечку</li>
+                    </ul>
+                    <div class="price-action">
+                        <a href="#" class="btn purchase-btn">оформить</a>
+                        <span class="price">10 999 руб./мес.</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+<section class="partners-form-section-alt">
+  <div class="page-inner">
+    <div class="partners-form-wrapper-alt"> 
+      <h2 class="partners-form-title-alt">Оставить заявку</h2> 
+      <form action="#" method="post" class="partners-form-alt"> 
+        <div class="form-group-alt"> 
+          <input type="text" id="name" name="name" placeholder="ФИО" required>
+        </div>
+        <div class="form-group-alt"> 
+          <input type="email" id="email" name="email" placeholder="e-mail" required>
+        </div>
+        <div class="form-group-alt"> 
+          <input type="tel" id="phone" name="phone" placeholder="телефон" required>
+        </div>
+        <button type="submit" class="submit-btn-alt">Отправить</button> 
+      </form>
     </div>
+  </div>
+</section>
+<section class="feedback-section">
+  <div class="feedback-wrapper">
+    <h2 class="feedback-title">Обратная связь</h2>
+    <p class="feedback-subtitle">
+      Помогите нам стать лучше! Если у вас есть пожелания по улучшению сервиса, мы будем рады их рассмотреть:
+    </p>
+    <form class="feedback-form" action="#" method="post">
+      <div class="input-container">
+        <input type="text" placeholder="Введите ваш комментарий..." class="feedback-input" />
+      </div>
+      <div class="button-container">
+        <button type="submit" class="submit-btn">
+          <span>Отправить</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="faq">
+    <div class="page-inner">
+        <h2 class="faq__title">Отвечаем на вопросы</h2>
+        <div class="faq__item">
+            <div class="faq__header">
+                <h3>1. Если после онлайн консультации мне понадобится личное посещение врача или сдача анализов?</h3>
+                <span class="faq__icon">+</span>
+            </div>
+            <div class="faq__content">
+                <p>Да, вы сможете посетить врача или сдать анализы в одном из наших центров. Врач даст вам все необходимые направления и рекомендации по дальнейшим шагам. Мы работаем, чтобы вам было максимально комфортно!</p>
+            </div>
+        </div>
+        <div class="faq__item">
+            <div class="faq__header">
+                <h3>2. Чем отличается консультация от подписки?</h3>
+                <span class="faq__icon">+</span>
+            </div>
+            <div class="faq__content">
+                <p>Консультация - это разовая услуга. Подписка же дает вам доступ к постоянному сопровождению, чатам с врачами и дополнительным привилегиям в зависимости от выбранного тарифа.</p>
+            </div>
+        </div>
+        <div class="faq__item">
+            <div class="faq__header">
+                <h3>3. Я сдал(а) анализы но на другом языке, вы сможете помочь?</h3>
+                <span class="faq__icon">+</span>
+            </div>
+            <div class="faq__content">
+                <p>Да, наши специалисты могут работать с результатами анализов на разных языках. Просто предоставьте нам скан или фотографию, и мы поможем вам с расшифровкой и рекомендациями.</p>
+            </div>
+        </div>
+        <div class="faq__item">
+            <div class="faq__header">
+                <h3>4. Я не понимаю консультация какого врача мне нужна?</h3>
+                <span class="faq__icon">+</span>
+            </div>
+            <div class="faq__content">
+                <p>Не беспокойтесь! Наш дежурный врач проведет предварительную консультацию, выслушает ваши симптомы и поможет определить, к какому специалисту вам нужно обратиться. Мы поможем вам сориентироваться.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="chat-section">
+  <div class="chat-popup-overlay" id="chatPopupOverlay">
+    <div class="chat-popup">
+      <div class="chat-popup-header">
+        <h3 class="chat-popup-title">Чат с администратором</h3>
+        <button class="chat-popup-close-btn" aria-label="Закрыть чат">&times;</button>
+      </div>
+
+      <div class="chat-popup-body" id="chatPopupBody">
+        <!-- Сообщения будут добавляться сюда динамически -->
+      </div>
+
+      <form class="chat-popup-form" id="chatPopupForm">
+        <input type="text" class="chat-popup-input" placeholder="Введите ваше сообщение..." id="chatMessageInput" />
+        <button type="submit" class="chat-popup-send-btn" aria-label="Отправить сообщение">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <button class="chat-toggle-btn" id="chatToggleBtn" aria-label="Открыть чат с администратором" aria-expanded="false" aria-controls="chatPopupOverlay">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+</section>
 {% endblock %}
 
 {% block extra_js %}
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
     // Инициализация главного Hero-слайдера
-var heroSwiper = new Swiper('.hero-swiper', {
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-});
+    var heroSwiper = new Swiper('.hero-swiper', {
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
 
-// Инициализация слайдера популярных анализов и капельниц
+    // Инициализация слайдера популярных анализов и капельниц
 var popularSwiper = new Swiper('.popular-swiper', {
-    slidesPerView: 1.5,
-    spaceBetween: 5,
+    slidesPerView: 1.2,
+    spaceBetween: 10,
+    freeMode: true,
     navigation: {
         nextEl: '.popular-swiper-next',
         prevEl: '.popular-swiper-prev',
     },
     breakpoints: {
-      
-        440: {
-              slidesPerView: 1.4,
-              spaceBetween: 5,
-          },
-        
-        630: {
+        480: {
+            slidesPerView: 1.6,
+            spaceBetween: 10,
+        },
+        640: {
             slidesPerView: 2.2,
-            spaceBetween: 5,
+            spaceBetween: 20,
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 25,
         },
         1024: {
-            slidesPerView: 3.5,
-            spaceBetween: 20,
+            slidesPerView: 4,
+            spaceBetween: 30,
         },
         1280: {
             slidesPerView: 5,
-            spaceBetween: 25,
+            spaceBetween: 30,
         },
+        1440: {
+            slidesPerView: 5.1,
+            spaceBetween: 30,
+        }
     },
 });
+    // Инициализация аккордеона
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.icon');
 
- const accordionHeaders = document.querySelectorAll('.accordion-header'); {
-
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const content = header.nextElementSibling;
-                    const icon = header.querySelector('.icon');
-
-                    // Закрываем все другие аккордеоны
-                    accordionHeaders.forEach(otherHeader => {
-                        if (otherHeader !== header && otherHeader.classList.contains('active')) {
-                            const otherContent = otherHeader.nextElementSibling;
-                            otherHeader.classList.remove('active');
-                            otherContent.classList.remove('active');
-                            otherContent.style.maxHeight = 0;
-                            otherHeader.querySelector('.icon').style.transform = 'rotate(0deg)';
-                        }
-                    });
-
-                    // Открываем/закрываем текущий
-                    header.classList.toggle('active');
-                    content.classList.toggle('active');
-
-                    if (content.classList.contains('active')) {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                        icon.style.transform = 'rotate(45deg)';
-                        
-                        // Слушаем окончание анимации
-                        if (window.innerWidth <= 768) {
-                        content.addEventListener('transitionend', function onTransitionEnd() {
-                            header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            // Удаляем слушателя, чтобы он не срабатывал повторно
-                            content.removeEventListener('transitionend', onTransitionEnd);
-                        });
-                      };
-                    } else {
-                        content.style.maxHeight = 0;
-                        icon.style.transform = 'rotate(0deg)';
-                    }
-                });
+            accordionHeaders.forEach(otherHeader => {
+                if (otherHeader !== header && otherHeader.classList.contains('active')) {
+                    const otherContent = otherHeader.nextElementSibling;
+                    otherHeader.classList.remove('active');
+                    otherContent.classList.remove('active');
+                    otherContent.style.maxHeight = 0;
+                    otherHeader.querySelector('.icon').style.transform = 'rotate(0deg)';
+                }
             });
-        };
+
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+
+            if (content.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.style.transform = 'rotate(45deg)';
+
+                if (window.innerWidth <= 768) {
+                    content.addEventListener('transitionend', function onTransitionEnd() {
+                        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        content.removeEventListener('transitionend', onTransitionEnd);
+                    });
+                };
+            } else {
+                content.style.maxHeight = 0;
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+    // Инициализация аккордеона подписок
+    const subscriptionHeaders = document.querySelectorAll('.subscription-accordion-header');
+
+    const handleAccordionClick = (header, content) => {
+        const icon = header.querySelector('.icon');
+        const isActive = header.classList.contains('active');
+
+        // Close all other subscription accordions
+        subscriptionHeaders.forEach(otherHeader => {
+            if (otherHeader !== header) {
+                otherHeader.classList.remove('active');
+                otherHeader.nextElementSibling.classList.remove('active');
+                otherHeader.nextElementSibling.style.maxHeight = 0;
+                otherHeader.querySelector('.icon').style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Toggle the clicked accordion
+        header.classList.toggle('active', !isActive);
+        content.classList.toggle('active', !isActive);
+
+        if (!isActive) {
+            content.style.maxHeight = content.scrollHeight + "px";
+            icon.style.transform = 'rotate(45deg)';
+        } else {
+            content.style.maxHeight = 0;
+            icon.style.transform = 'rotate(0deg)';
+        }
+    };
+
+    subscriptionHeaders.forEach(header => {
+        const content = header.nextElementSibling;
+        header.addEventListener('click', () => {
+            handleAccordionClick(header, content);
+        });
+    });
+
+// Инициализация аккордеона FAQ
+const faqHeaders = document.querySelectorAll('.faq__header');
+faqHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.faq__icon');
+
+        faqHeaders.forEach(otherHeader => {
+            if (otherHeader !== header && otherHeader.classList.contains('active')) {
+                const otherContent = otherHeader.nextElementSibling;
+                otherHeader.classList.remove('active');
+                otherContent.classList.remove('active');
+                otherContent.style.maxHeight = 0;
+                otherHeader.querySelector('.faq__icon').style.transform = 'rotate(0deg)';
+            }
+        });
+
+        header.classList.toggle('active');
+        content.classList.toggle('active');
+
+        if (content.classList.contains('active')) {
+            content.style.maxHeight = content.scrollHeight + "px";
+            icon.style.transform = 'rotate(45deg)';
+        } else {
+            content.style.maxHeight = 0;
+            icon.style.transform = 'rotate(0deg)';
+        }
+    });
+});
+
+   // JavaScript для управления всплывающим окном чата
+document.addEventListener('DOMContentLoaded', () => {
+    // Используем id для надежного выбора элементов
+    const chatPopupOverlay = document.getElementById('chatPopupOverlay');
+    const closeChatButton = document.querySelector('.chat-popup-close-btn'); // Можно оставить, если id нет
+    const chatToggleBtn = document.getElementById('chatToggleBtn');
+    const chatPopupForm = document.getElementById('chatPopupForm');
+    const chatMessageInput = document.getElementById('chatMessageInput');
+    const chatPopup = document.querySelector('.chat-popup'); // Выбираем сам попап
+    const chatPopupBody = document.getElementById('chatPopupBody'); // Получаем элемент тела чата
+
+    // Проверяем, существуют ли элементы, чтобы избежать ошибок
+    if (!chatPopupOverlay || !closeChatButton || !chatToggleBtn || !chatPopupForm || !chatMessageInput) {
+        console.warn('Не все необходимые элементы чата найдены в DOM.');
+        return; // Прекращаем выполнение, если критические элементы отсутствуют
+    }
+
+    // Переменные для хранения состояния скролла
+    let scrollPosition = 0;
+
+    // Функция для открытия попапа
+    const openChatPopup = () => {
+        // 1. Сохраняем текущую позицию скролла
+        scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+        // 2. Блокируем скролл основной страницы через класс и инлайновые стили
+        document.body.classList.add('no-scroll');
+        // Дополнительные стили для надежной блокировки на мобильных
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.width = '100%';
+
+        // Также блокируем скролл у html для полной уверенности
+        document.documentElement.style.overflow = 'hidden';
+
+        // 3. Показываем оверлей
+        chatPopupOverlay.classList.add('is-visible');
+
+        // 4. Обновляем атрибут доступности для кнопки
+        chatToggleBtn.setAttribute('aria-expanded', 'true');
+
+        // 5. Для десктопа (769px+) убеждаемся, что попап правильно спозиционирован
+        if (window.innerWidth >= 769) {
+            // Центрируем попап по вертикали внутри оверлея
+            chatPopup.style.top = '50%';
+            chatPopup.style.transform = 'translateY(-50%) scale(1)';
+            chatPopup.style.webkitTransform = 'translateY(-50%) scale(1)';
+        }
+        // На мобильных фокус на input не ставим сразу, чтобы не мешать анимации открытия
+        // Фокус будет установлен после завершения анимации или по таймауту
+        // setTimeout(() => { chatMessageInput.focus(); }, 300); // 300ms = длительность transition
+    };
+
+    // Функция для закрытия попапа
+    const closeChatPopup = () => {
+        // 1. Скрываем оверлей
+        chatPopupOverlay.classList.remove('is-visible');
+
+        // 2. Разблокируем скролл основной страницы
+        document.body.classList.remove('no-scroll');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.documentElement.style.overflow = '';
+
+        // 3. Восстанавливаем позицию скролла
+        window.scrollTo(0, scrollPosition);
+
+        // 4. Обновляем атрибут доступности для кнопки
+        chatToggleBtn.setAttribute('aria-expanded', 'false');
+
+        // 5. Сброс стилей попапа на случай изменения размера окна
+        if (window.innerWidth >= 769) {
+             chatPopup.style.top = '';
+             chatPopup.style.transform = '';
+             chatPopup.style.webkitTransform = '';
+        }
+        // 6. Убираем фокус с input при закрытии
+        chatMessageInput.blur();
+    };
+
+    // Открытие попапа по клику на кнопку
+    chatToggleBtn.addEventListener('click', (event) => {
+        event.preventDefault(); // Предотвращаем стандартное поведение
+        openChatPopup();
+        // Откладываем фокус, чтобы анимация открытия завершилась
+        setTimeout(() => {
+            chatMessageInput.focus();
+        }, 350); // Немного больше, чем transition-duration (300ms)
+    });
+
+    // Закрытие попапа по клику на кнопку закрытия
+    closeChatButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Предотвращаем возможное стандартное поведение
+        closeChatPopup();
+    });
+
+    // Закрытие попапа по клику вне окна
+    chatPopupOverlay.addEventListener('click', (e) => {
+        if (e.target === chatPopupOverlay) {
+            closeChatPopup();
+        }
+    });
+
+    // Обработка отправки формы
+    chatPopupForm.addEventListener('submit', (event) => {
+        // 1. Предотвращаем стандартную перезагрузку страницы/отправку формы
+        event.preventDefault();
+
+        const messageText = chatMessageInput.value.trim();
+        if (messageText) {
+            // 2. Здесь должна быть логика отправки сообщения
+            // Например, отправка через WebSocket или AJAX
+            console.log('Отправка сообщения:', messageText);
+
+            // --- Пример добавления сообщения в UI ---
+            if (chatPopupBody) {
+                // Создаем элемент для нового исходящего сообщения
+                const newMessageElement = document.createElement('div');
+                newMessageElement.classList.add('message', 'outgoing');
+                newMessageElement.textContent = messageText;
+
+                // Добавляем сообщение в тело чата
+                chatPopupBody.appendChild(newMessageElement);
+
+                // Прокручиваем чат вниз к новому сообщению
+                // Используем requestAnimationFrame для гарантии, что DOM обновлен
+                requestAnimationFrame(() => {
+                    chatPopupBody.scrollTop = chatPopupBody.scrollHeight;
+                });
+            }
+            // ---
+
+            // 3. Очищаем поле ввода
+            chatMessageInput.value = '';
+
+            // 4. !!! ВАЖНО: Восстанавливаем фокус на поле ввода
+            // Это предотвращает закрытие клавиатуры на мобильных устройствах
+            // Фокус уже установлен, но на всякий случай
+            chatMessageInput.focus();
+        }
+        // Если сообщение пустое, просто предотвращаем отправку, фокус остается
+    });
+
+    // Дополнительно: Закрытие попапа по нажатию клавиши Escape
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && chatPopupOverlay.classList.contains('is-visible')) {
+            closeChatPopup();
+        }
+    });
+});
 
     </script>
 {% endblock %}

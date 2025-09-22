@@ -1,0 +1,264 @@
+/* ==========================================================================
+  БЛОК: Подписки (subscriptions-section)
+  ========================================================================== */
+/* Mobile-first: Карточки подписок в виде аккордеона */
+.subscriptions-section {
+  padding: 40px 0;
+}
+/* Контейнер для карточек, используем Flexbox */
+.subscriptions-grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; /* По умолчанию в колонку для мобильных */
+  gap: 20px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+/* Скрываем заголовок h3 .subscription-title на мобильной версии */
+.subscription-title {
+  display: none;
+}
+/* Стили для заголовка аккордеона */
+.subscription-accordion-header {
+  background-color: #fff;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 20px 15px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+@media (hover: hover) and (pointer: fine) {
+  .subscription-accordion-header:hover {
+    background: -webkit-linear-gradient(top, #b8e0f0, #e9f5fa);
+    background: -moz-linear-gradient(top, #b8e0f0, #e9f5fa);
+    background: -o-linear-gradient(top, #b8e0f0, #e9f5fa);
+    background: linear-gradient(180deg, #b8e0f0, #e9f5fa);
+    border: 2px solid #54b3d6;
+  }
+}
+.subscription-accordion-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+/* Стиль для иконки "плюс-минус" */
+.subscription-accordion-header .icon {
+  font-size: 24px;
+  color: var(--primary-color);
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  -o-transition: transform 0.3s ease;
+  -moz-transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+/* Поворот иконки при открытии */
+.subscription-accordion-header.active .icon {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* Стили для самой карточки подписки (содержимое аккордеона) */
+.subscription-card {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.4s ease-out;
+  -moz-transition: max-height 0.4s ease-out;
+  -o-transition: max-height 0.4s ease-out;
+  transition: max-height 0.4s ease-out;
+  background-color: #fff;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.subscription-card.active {
+  max-height: 520px; /* Adjust this value as needed to fit content */
+  padding: 30px 15px;
+}
+/* Стили для списка преимуществ */
+.subscription-card .features-list {
+  text-align: left;
+  padding-left: 20px;
+  list-style: none;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.subscription-card .features-list li {
+  position: relative;
+  font-size: 16px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+/* Стили для маркера списка (используем юникод, чтобы не было зависимости от шрифта) */
+.subscription-card .features-list li::before {
+  content: '•';
+  color: var(--primary-color);
+  font-size: 20px;
+  position: absolute;
+  left: -18px;
+  top: -2px;
+}
+/* Стили для цены и кнопки */
+.subscription-card .price-action {
+  margin-top: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
+}
+.subscription-card .purchase-btn {
+  background: #fff;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 12px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .subscription-card .purchase-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+}
+.subscription-card .price {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+/* Планшеты и выше (для экранов от 769px) */
+@media (min-width: 769px) {
+  .subscriptions-grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row; /* На десктопе делаем ряд */
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch; /* Выравниваем карточки по высоте */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .subscriptions-title {
+    width: 350px;
+  }
+  .subscription-title {
+    display: block; /* Показываем заголовок на десктопе */
+  }
+  /* Отключаем стили аккордеона на десктопе */
+  .subscription-accordion-header {
+    display: none; /* Скрываем заголовок аккордеона */
+  }
+  .subscription-card {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important; /* Принудительно показываем карточки */
+    max-height: none !important; /* Удаляем ограничение max-height */
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 300px;
+    -ms-flex: 1 1 300px;
+    flex: 1 1 300px; /* Гибкий размер, с базой 300px */
+    max-width: 390px;
+    height: 520px;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; /* Центрируем контент внутри карточки */
+    border: 2px solid #ddd;
+    padding: 30px 15px; /* Возвращаем отступы */
+    margin: 0; /* Убираем лишние отступы */
+  }
+  .subscription-card h3 {
+    display: block;
+    font-size: 24px;
+  }
+}
+/* Планшеты (для экранов от 769px до 1434px) */
+@media (min-width: 769px) and (max-width: 1434px) {
+  .subscriptions-title {
+    width: 300px;
+  }
+  .subscription-card h3 {
+    display: block;
+  }
+  .subscription-card {
+    max-width: 350px;
+    height: 480px;
+  }
+}

@@ -1,0 +1,117 @@
+/* ==========================================================================
+  БЛОК: Специалисты (specialist-section)
+  ========================================================================== */
+.specialist-title-wrapper {
+  background: -webkit-linear-gradient(left, #54b3d673, #ffffff);
+  background: -moz-linear-gradient(left, #54b3d673, #ffffff);
+  background: -o-linear-gradient(left, #54b3d673, #ffffff);
+  background: linear-gradient(to right, #54b3d673, #ffffff);
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.specialist-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+}
+.specialist-section {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 15px;
+  text-align: center;
+}
+.specialist-grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.specialist-card {
+  background-color: #fff;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  -webkit-transition: -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+  transition: -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+  -o-transition: transform 0.2s, box-shadow 0.2s;
+  -moz-transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, -webkit-transform 0.2s, -webkit-box-shadow 0.2s;
+  text-decoration: none;
+  color: var(--primary-color);
+  padding: 10px;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.specialist-card h4 {
+  text-align: center;
+  margin: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .specialist-card:hover {
+    background-color: #54b3d66f;
+    color: #ffffff;
+  }
+}
+/* Планшеты и выше (для экранов от 769px) */
+@media (min-width: 769px) {
+  /* Специалисты */
+  .specialist-title {
+    font-size: 28px;
+  }
+  .specialist-grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .specialist-card {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 calc(25% - 15px);
+    -ms-flex: 1 1 calc(25% - 15px);
+    flex: 1 1 calc(25% - 15px);
+    max-width: 200px;
+  }
+}

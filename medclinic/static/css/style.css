@@ -1,0 +1,23 @@
+/*
+ * ==========================================================================
+ * ГЛАВНЫЙ ФАЙЛ СТИЛЕЙ
+ * Импорт всех CSS-модулей
+ * ==========================================================================
+ */
+
+
+
+@import url('./base/_variables.css');
+@import url('./base/_base.css');
+
+@import url('./blocks/_hero.css');
+@import url('./blocks/_search-bar.css');
+@import url('./blocks/_accordion.css');
+@import url('./blocks/_specialist.css');
+@import url('./blocks/_popular.css');
+@import url('./blocks/_subscriptions.css');
+@import url('./blocks/_partners-form.css');
+@import url('./blocks/_feedback.css');
+@import url('./blocks/_faq.css');
+@import url('./blocks/_chat-popup.css');
+@import url('./blocks/_registration.css');
