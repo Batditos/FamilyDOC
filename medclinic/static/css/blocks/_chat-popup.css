@@ -2,18 +2,13 @@
    БЛОК: Поп-ап для чата с адаптацией Mobile-first
    ========================================================================== */
 
-/* 1. Стили для мобильных устройств (по умолчанию) */
-/* Общий контейнер, скрывающий окно по умолчанию */
+/* ------------------------------------------------------------------------- */
+/* 1. Общие стили оверлея */
+/* ------------------------------------------------------------------------- */
 .chat-popup-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Занимает весь экран */
-  background-color: rgba(0, 0, 0, 0.5);
-  /* display: flex; Убираем flex по умолчанию */
-  /* justify-content: center; Убираем для универсальности */
-  /* align-items: center; Убираем для универсальности */
+  inset: 0;
+
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -21,52 +16,50 @@
   -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
   -moz-transition: opacity 0.3s ease, visibility 0.3s ease;
   -o-transition: opacity 0.3s ease, visibility 0.3s ease;
-  /* overflow: hidden; Не блокируем скролл оверлея */
 }
 
-/* Класс для отображения всплывающего окна */
 .chat-popup-overlay.is-visible {
   opacity: 1;
   visibility: visible;
 }
 
-/* Сама форма чата (адаптивная высота на мобильных) */
+/* ------------------------------------------------------------------------- */
+/* 2. Стили основного окна чата */
+/* ------------------------------------------------------------------------- */
 .chat-popup {
   position: fixed;
-  top: 0; /* Прилипает к верху */
-  left: 0;
   bottom: 0;
   right: 0;
   width: 100%;
-  /* height: 100%; Убираем фиксированную высоту */
+  height: 100%;
   max-width: none;
   background-color: var(--background-color);
-  border-radius: 0; /* Убираем закругленные углы */
-  box-shadow: none; /* Убираем тень */
+  border-radius: 0;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; Убираем, т.к. внутренние элементы будут скроллиться */
-  /* Анимация "выезда" снизу */
-  transform: translateY(100%);
-  -webkit-transform: translateY(100%);
-  -moz-transform: translateY(100%);
-  -o-transform: translateY(100%);
-  -ms-transform: translateY(100%);
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  -ms-transform: translateX(100%);
   transition: transform 0.3s ease;
   -webkit-transition: -webkit-transform 0.3s ease;
-  /* НОВОЕ: Ограничиваем максимальную высоту, чтобы учитывать возможное изменение viewport (клавиатура) */
-  max-height: 100dvh; /* Используем dvh для лучшей поддержки мобильных браузеров */
+  max-height: 100dvh;
+  will-change: transform;
 }
 
 .chat-popup-overlay.is-visible .chat-popup {
-  transform: translateY(0);
-  -webkit-transform: translateY(0);
-  -moz-transform: translateY(0);
-  -o-transform: translateY(0);
-  -ms-transform: translateY(0);
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -o-transform: translateX(0);
+  -ms-transform: translateX(0);
 }
 
-/* Кнопка открытия чата */
+/* ------------------------------------------------------------------------- */
+/* 3. Кнопка открытия чата */
+/* ------------------------------------------------------------------------- */
 .chat-toggle-btn {
   position: fixed;
   bottom: 20px;
@@ -91,7 +84,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .chat-toggle-btn:hover {
-    background-color: #4390b0; /* Более темный оттенок основного цвета */
+    background-color: #4390b0;
     transform: scale(1.05);
     -webkit-transform: scale(1.05);
     -moz-transform: scale(1.05);
@@ -100,7 +93,9 @@
   }
 }
 
-/* Стили для заголовка попапа */
+/* ------------------------------------------------------------------------- */
+/* 4. Заголовок чата */
+/* ------------------------------------------------------------------------- */
 .chat-popup-header {
   padding: 15px 20px;
   background: linear-gradient(to right, #54b3d673, #ffffff);
@@ -108,7 +103,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0; /* Заголовок не сжимается */
+  flex-shrink: 0;
 }
 
 .chat-popup-title {
@@ -136,18 +131,18 @@
   }
 }
 
-/* Стили для тела чата */
+/* ------------------------------------------------------------------------- */
+/* 5. Тело чата */
+/* ------------------------------------------------------------------------- */
 .chat-popup-body {
   flex-grow: 1;
   padding: 20px;
-  /* НОВОЕ: Основной скролл происходит здесь */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
   background-color: var(--secondary-bg-color);
-  /* НОВОЕ: Минимальная высота, чтобы контент не сжимался до нуля */
-  min-height: 0; /* Критично для flexbox */
+  min-height: 0;
 }
 
 .message {
@@ -172,14 +167,16 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Стили для формы ввода сообщения */
+/* ------------------------------------------------------------------------- */
+/* 6. Форма ввода */
+/* ------------------------------------------------------------------------- */
 .chat-popup-form {
   padding: 15px 20px;
   border-top: 1px solid #ddd;
   display: flex;
   gap: 10px;
   align-items: center;
-  flex-shrink: 0; /* Форма не сжимается */
+  flex-shrink: 0;
 }
 
 .chat-popup-input {
@@ -217,7 +214,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .chat-popup-send-btn:hover {
-    background-color: #4390b0; /* Более темный оттенок основного цвета */
+    background-color: #4390b0;
   }
 }
 
@@ -228,42 +225,28 @@
   height: 20px;
 }
 
-/* ==========================================================================
-   Адаптация для планшетов и десктопов (Mobile-first)
-   ========================================================================== */
-
-/* Планшеты и выше (для экранов от 769px) */
+/* ------------------------------------------------------------------------- */
+/* 7. Адаптивность: планшеты и десктопы */
+/* ------------------------------------------------------------------------- */
 @media (min-width: 769px) {
-  /* Переопределяем стили самого чата для десктопа */
   .chat-popup {
-    position: absolute;
-    /* Позиционирование по центру вертикали внутри оверлея */
-    top: 50%;
-    right: 20px; /* Прилипает к правому краю */
-    /* Убираем bottom: 0, left: 0, right: 0, top: 0 */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     width: 90%;
     max-width: 400px;
-    /* height: auto; Убираем */
+    width: 90%;
+    max-width: 400px;
+    
     max-height: 70vh; /* Ограничиваем высоту на десктопе */
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    /* Анимация "вылетания" из кнопки */
-    transform: translateY(-50%) scale(0.4);
-    -webkit-transform: translateY(-50%) scale(0.4);
-    -moz-transform: translateY(-50%) scale(0.4);
-    -o-transform: translateY(-50%) scale(0.4);
-    -ms-transform: translateY(-50%) scale(0.4);
-    transform-origin: center right; /* Центрируем по вертикали, якорь справа */
-    -webkit-transform-origin: center right;
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
-    -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
+    transform: translateX(100%);
+    /* transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease; */
   }
 
   .chat-popup-overlay.is-visible .chat-popup {
-    transform: translateY(-50%) scale(1);
-    -webkit-transform: translateY(-50%) scale(1);
-    -moz-transform: translateY(-50%) scale(1);
-    -o-transform: translateY(-50%) scale(1);
-    -ms-transform: translateY(-50%) scale(1);
+    transform: translateX(0);
   }
 }
+
