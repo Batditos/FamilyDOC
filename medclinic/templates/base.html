@@ -15,7 +15,7 @@
     
     {% block extra_css %}{% endblock %}
 </head>
-<body >
+<body>
 <header class="header">
     <div class="header__container container">
         <a href="/" class="header__logo-link">
@@ -149,8 +149,17 @@
         </div>
     </div>
 </footer>
+<script src="{% static 'js/utils/scrollbar-width.js' %}"></script>
+<script src="{% static 'js/components/hero-slider.js' %}"></script>
+<script src="{% static 'js/components/popular-slider.js' %}"></script>
+<script src="{% static 'js/components/accordion.js' %}"></script>
+<script src="{% static 'js/components/chat-popup.js' %}"></script>
+<script src="{% static 'js/components/mobile-menu.js' %}"></script>
+<script src="{% static 'js/components/cart-counter.js' %}"></script>
+<script src="{% static 'js/components/desktop-nav.js' %}"></script>
+<script src="{% static 'js/components/search-modal.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
 
-<script src="{% static 'js/base.js' %}"></script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>
