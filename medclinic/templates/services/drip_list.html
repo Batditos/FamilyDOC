@@ -1,31 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Каталог капельниц</title>
-</head>
-<body>
-    <h1>Каталог капельниц</h1>
-    <ul>
-        {% for drip in drips %}
-            <li>
-                <strong>{{ drip.name }}</strong> — {{ drip.price }} ₽
-                {% comment %} <a href="{% url 'services:drip_detail' drip.id %}">Подробнее</a> {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
 
-                <!-- Кнопка добавления в корзину -->
-                <form action="{% url 'cart:cart_add' drip.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </li>
-        {% empty %}
-            <li>Нет капельниц</li>
-        {% endfor %}
-    </ul>
-    <br>
-    <a href="{% url 'services:drip_admin' %}">Админка капельниц</a>
-    <a href="{% url 'cart:cart_detail' %}">Перейти в корзину</a>
-</body>
-</html>
+{% block title %}Каталог капельниц{% endblock %}
 
-        
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/drips.css' %}">
+{% endblock %}
 
+{% block content %}
+    <section class="drips-section">
+        <div class="page-inner">
+            <h1 class="section-title">Каталог капельниц</h1>
+
+            {% if drips %}
+                <div class="drips-grid">
+                    {% for drip in drips %}
+                        <div class="drip-card">
+                            <h2 class="drip-title">{{ drip.name }}</h2>
+                            <p class="drip-description">{{ drip.description }}</p>
+                            <div class="drip-footer">
+                                <span class="drip-price">{{ drip.price }} ₽</span>
+                                <form action="{% url 'cart:cart_add' drip.id %}" method="post" class="add-to-cart-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-primary add-to-cart-btn">Добавить в корзину</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-message">Нет доступных капельниц</p>
+            {% endif %}
+            
+            <div class="drips-actions">
+                <a href="{% url 'services:drip_admin' %}" class="btn-secondary">Админка капельниц</a>
+                <a href="{% url 'cart:cart_detail' %}" class="btn-primary">Перейти в корзину</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

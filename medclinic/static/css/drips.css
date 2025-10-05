@@ -1,0 +1,165 @@
+/* ==========================================================================
+   БЛОК: Переменные CSS
+   ========================================================================== */
+:root {
+    --primary-color: #54b3d6;
+    --text-color: #333;
+    --light-text-color: #bcbcbc;
+    --border-color: #ddd;
+    --background-color: #f8f8f8;
+    --secondary-bg-color: #fafafa;
+}
+
+/* ==========================================================================
+   БЛОК: Каталог капельниц
+   ========================================================================== */
+.drips-section {
+    padding: 40px 0;
+    background-color: var(--background-color);
+}
+
+.drips-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-bottom: 30px;
+}
+
+.drip-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    height: 100%;
+}
+
+.drip-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.drip-description {
+    font-size: 14px;
+    color: var(--text-color);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.drip-footer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.drip-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.add-to-cart-form {
+    width: 100%;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #4390b0;
+}
+
+.empty-message {
+    font-size: 18px;
+    color: var(--light-text-color);
+    padding: 40px 0;
+    text-align: center;
+}
+
+.drips-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.add-to-cart-btn {
+    align-items: center;
+}
+.btn-primary:hover {
+    background-color: #4390b0;
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: #fff;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+
+/* ==========================================================================
+   Медиа-запросы (Адаптация для больших экранов)
+   ========================================================================== */
+@media (min-width: 769px) {
+    .drips-actions {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: auto;
+        flex: 1;
+        max-width: 250px;
+    }
+}
