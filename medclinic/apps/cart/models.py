@@ -1,5 +1,4 @@
 from django.db import models
-
 from services.models import Service
 from django.conf import settings
 
@@ -12,6 +11,10 @@ class Cart(models.Model):
     )
     session_key = models.CharField(max_length=40, null=True, blank=True)
 
+    def get_total_price(self):
+        # The fix is here: you need to call the method with ().
+        return sum(item.total_price() for item in self.items.all())
+    
     def __str__(self):
         if self.user:
             return f"Корзина {self.user.username}"
